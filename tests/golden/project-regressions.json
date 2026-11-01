@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "purpose": "Independent approved P01-P10 persistence and ownership expectations. These are local project tests, not a claim of cloud synchronization.",
+  "cases": [
+    { "id": "PROJECT-REG-001", "input": "Save a project containing a PDF Blob and an ephemeral blob preview URL, then list projects", "expected": { "originalBytesRetained": true, "sourceIdAndRevisionRetained": true, "expiredBlobUrlNotPersisted": true } },
+    { "id": "PROJECT-REG-002", "input": "Save two projects with different source/question/chat/checklist states", "expected": { "recordsIsolatedByProjectId": true, "updatingOneDoesNotOverwriteOther": true } },
+    { "id": "PROJECT-REG-003", "input": "Move a document from project Alpha to project Beta", "expected": { "oneOwnerAfterMove": "Beta", "originalBytesRetained": true, "sourceIdAndRevisionRetained": true, "bothAnalysesInvalidated": true, "bothChatsInvalidated": true } },
+    { "id": "PROJECT-REG-004", "input": "Rename, archive, then restore a project", "expected": { "sameProjectId": true, "sameDocuments": true, "noIrreversibleDeletion": true } },
+    { "id": "PROJECT-REG-005", "input": "Browser IndexedDB is unavailable or a storage write fails", "expected": { "promiseRejects": true, "mustNotReportSaved": true, "existingStoredDataUnchanged": true } },
+    { "id": "PROJECT-REG-006", "input": "Attempt to move a document to a missing project or from the wrong project", "expected": { "operationRejects": true, "allExistingOwnershipUnchanged": true } },
+    { "id": "PROJECT-REG-007", "input": "The second project write fails during a two-project document move", "expected": { "wholeMoveAborted": true, "documentStillOwnedByOriginalProject": true, "noPartialDestinationWrite": true } },
+    { "id": "PROJECT-REG-008", "input": "Mutate the object returned by listProjects without saving it", "expected": { "persistentRecordUnchanged": true, "futureReadReturnsStoredSnapshot": true } }
+  ]
+}

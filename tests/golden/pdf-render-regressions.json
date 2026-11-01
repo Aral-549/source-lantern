@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "purpose": "Permanent browser behavior regression for the observed React-PDF text-layer lifecycle failure. Pixel geometry requires a real browser; the Node PDF extraction integration alone cannot cover it.",
+  "cases": [
+    {
+      "id": "PDF-REG-001",
+      "name": "PDF text layers survive reader state updates",
+      "contracts": ["E11", "E13", "E14", "W12", "W13", "W25"],
+      "input": {
+        "source": "Generated selectable five-page fictional scholarship guidelines PDF",
+        "actions": [
+          "Complete the labelled sample workflow",
+          "Wait for PDF canvas pages and text layers to finish rendering",
+          "Select an evidence finding and allow resulting reader state updates",
+          "Wait through at least one additional render cycle",
+          "Select a multiline passage and inspect its finding highlight"
+        ]
+      },
+      "expected": {
+        "canvasPages": 5,
+        "nonemptyPdfTextLayers": 5,
+        "selectableTextRemainsPresentAfterStateUpdates": true,
+        "matchingEvidenceHighlightRectanglesGreaterThan": 0,
+        "multilineTextSelectionAvailable": true,
+        "mustNotContinuouslyClearAndRestartTextLayerRendering": true,
+        "sampleLabelVisible": true
+      },
+      "observedDefect": "All five canvases rendered while text layers had zero children and evidence highlights stayed empty. An inline onRenderTextLayerSuccess callback changed identity after its own setRenderVersion update, restarting the React-PDF text-layer effect.",
+      "verificationRequirement": "Parent agent must recheck actual browser text-layer content and highlights after the stable callback fix. This vector does not itself claim that browser verification passed."
+    }
+  ]
+}

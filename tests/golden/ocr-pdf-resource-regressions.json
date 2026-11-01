@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "OCR-REG-010",
+      "input": "Recognize/extract a PDF through the installed current PDF.js API",
+      "expected": { "getDocumentInput": "DocumentInitParameters with url", "destroyedResource": "PDF loading task", "mustNotRequireDestroyOnDocumentProxy": true },
+      "observedDefect": "TypeScript rejected passing a string to getDocument and treating PDFDocumentProxy as a resource with destroy(). The loading task owns destroy()."
+    }
+  ]
+}

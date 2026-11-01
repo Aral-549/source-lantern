@@ -1,0 +1,48 @@
+import fs from 'node:fs';
+const path = 'src/components/workspace.tsx';
+let text = fs.readFileSync(path, 'utf8');
+function replace(before, after) { if (!text.includes(before)) throw new Error(`Integration anchor missing: ${before.slice(0, 90)}`); text = text.replace(before, after); }
+replace("import SourceReader from '@/components/source-reader';", "import SourceReader from '@/components/source-reader';\nimport OcrPanel from '@/components/ocr-panel';\nimport PaperUpload from '@/components/paper-upload';\nimport { ColouringLoader, LabelInput, LiquidToggle, MagnifyingDock, SeekSearch, ToastStack } from '@/components/research-controls';\nimport type { WorkspaceDraft, WorkspaceSnapshot } from '@/lib/projects';");
+replace('type Draft = { input: SourceInput; preview: Source };', 'type Draft = WorkspaceDraft;');
+replace("!['pdf', 'docx', 'txt', 'md'].includes(ext || '')", "!['pdf', 'docx', 'txt', 'md', 'png', 'jpg', 'jpeg', 'webp'].includes(ext || '')");
+replace('use PDF, DOCX, TXT or MD.', 'use PDF, DOCX, TXT, MD, PNG, JPG or WebP.');
+replace("if (kind === 'pdf') { preview.fileUrl = URL.createObjectURL(file); preview.status = 'ready'; }", "if (kind === 'pdf' || ['png', 'jpg', 'jpeg', 'webp'].includes(ext || '')) { preview.fileUrl = URL.createObjectURL(file); preview.status = 'ready'; if (kind !== 'pdf') { preview.imageUrl = preview.fileUrl; preview.unanalyzed = [{ kind: 'image', count: 1 }]; } }");
+replace('size: file.size, ...(kind', 'size: file.size, ...(kind');
+replace('}, preview });\n    }\n    if (valid()', '}, preview, blob: file });\n    }\n    if (valid()');
+const uploadStart = text.indexOf("{tab === 'upload' ? <div className=\"upload-zone\"");
+const uploadEnd = text.indexOf(' : <><label className="sr-only"', uploadStart);
+if (uploadStart < 0 || uploadEnd < 0) throw new Error('Upload markup missing');
+text = text.slice(0, uploadStart) + "{tab === 'upload' ? <PaperUpload busy={busy} onFiles={files => addFiles(files)} />" + text.slice(uploadEnd);
+replace('<input className="text-input source-title-input" value={title} onChange={e => setTitle(e.target.value)} placeholder="Source title (optional)" aria-label="Source title" />', '<LabelInput label="Source title (optional)" value={title} onChange={setTitle} />');
+replace('export default function Workspace({ initialDemo }: { initialDemo?: string } = {}) {', "export default function Workspace({ initialDemo, projectId, projectTitle, initialSnapshot, onSnapshotChange, projectNavigation, onRequestSample }: { initialDemo?: string; projectId?: string; projectTitle?: string; initialSnapshot?: WorkspaceSnapshot; onSnapshotChange?: (snapshot: WorkspaceSnapshot) => void; projectNavigation?: ReactNode; onRequestSample?: () => void } = {}) {");
+replace('useState<Analysis | null>(null); const [question, setQuestion] = useState(\'\'); const [drafts, setDrafts] = useState<Draft[]>([]);', "useState<Analysis | null>(initialSnapshot?.analysis || null); const [question, setQuestion] = useState(initialSnapshot?.question || ''); const [drafts, setDrafts] = useState<Draft[]>(initialSnapshot?.drafts || []);");
+replace('const [reviewed, setReviewed] = useState<string[]>([]);', 'const [reviewed, setReviewed] = useState<string[]>(initialSnapshot?.reviewed || []);');
+replace('useState<SelectionContext[]>([]); const [messages, setMessages] = useState<ChatMessage[]>([]);', 'useState<SelectionContext[]>(initialSnapshot?.contexts || []); const [messages, setMessages] = useState<ChatMessage[]>(initialSnapshot?.messages || []);');
+replace("const [manualItems, setManualItems] = useState<Analysis['checklist']>([]);", "const [manualItems, setManualItems] = useState<Analysis['checklist']>(initialSnapshot?.manualItems || []);\n  useEffect(() => { onSnapshotChange?.({ analysis, question, drafts, messages, contexts, manualItems, reviewed }); }, [analysis, question, drafts, messages, contexts, manualItems, reviewed, onSnapshotChange]);");
+replace('async function runSample() {\n', "async function runSample() {\n    if (projectId && projectId !== 'sample-scholarship' && onRequestSample) { onRequestSample(); return; }\n");
+replace("setDrafts(current => { current.forEach", "setDrafts(current => { if (projectId) return current; current.forEach");
+text = text.replaceAll('`${analysis?.id}:${item.id}`', '`${projectId || "local"}:${analysis?.id}:${item.id}`').replaceAll('`${analysis.id}:${item.id}`', '`${projectId || "local"}:${analysis.id}:${item.id}`');
+replace('<span className="sidebar-label">My workspace</span>', '<span className="sidebar-label">{projectTitle || "My workspace"}</span>');
+replace('<button className="new-analysis-button"', '{projectNavigation}<button className="new-analysis-button"');
+replace('<span className="breadcrumb-root">My workspace</span>', '<span className="breadcrumb-root">{projectTitle || "My workspace"}</span>');
+replace('<div className="loading-view"><span', '<div className="loading-view"><ColouringLoader progress={((progress?.index || 0) + 1) * 18} label="Reading the prepared sources" /><span');
+replace('const showModal = (value: Modal)', `function updateOcrSource(updated: Source) {
+    runRef.current?.abort(); askRef.current?.abort(); generation.current++;
+    const originalSources = analysis?.sources;
+    setAnalysis(null); setMessages([]); setContexts([]); setManualItems([]); setSelectedId(null); setActiveEvidence(null); setAsking(false);
+    setDrafts(current => originalSources ? originalSources.map(source => ({ input: { id: source.id, kind: source.kind, title: source.title, text: source.id === updated.id ? updated.canonicalText : source.canonicalText, fileName: source.kind === 'pdf' ? source.domain || source.title + '.pdf' : undefined }, preview: source.id === updated.id ? updated : source })) : current.map(draft => draft.preview.id === updated.id ? { ...draft, input: { ...draft.input, text: updated.canonicalText }, preview: updated } : draft));
+    setToast('Text extracted. Review the original before using the transcription. Previous findings were cleared.');
+  }
+  const showModal = (value: Modal)`);
+replace("{activeSource.error && !activeSource.canonicalText", "{(activeSource.imageUrl || activeSource.kind === 'pdf') && <OcrPanel key={activeSource.id + activeSource.revision} source={activeSource} onUpdate={updateOcrSource} />}{activeSource.error && !activeSource.canonicalText");
+replace('<strong>Show highlights</strong>', '<strong>Show highlights</strong><LiquidToggle label="All highlights" checked={hiddenTypes.length === 0} onChange={on => setHiddenTypes(on ? [] : CATEGORIES.filter(category => category.type !== "gap").map(category => category.type))} />');
+replace('<div className="search-input"><Search size={16} /><input autoFocus placeholder={modal === \'search\' ? \'Search words or phrases…\' : \'Filter sources…\'} value={search} onChange={e => setSearch(e.target.value)} aria-label="Search loaded sources" /></div>', '<SeekSearch value={search} onChange={setSearch} />');
+const navStart = text.indexOf('<nav className="mobile-nav"'); const navEnd = text.indexOf('</nav>', navStart) + 6;
+if (navStart < 0 || navEnd < 6) throw new Error('Mobile navigation missing');
+text = text.slice(0, navStart) + `<MagnifyingDock active={mobile} items={[{ id: 'sources', label: 'Sources', icon: FolderOpen }, { id: 'reader', label: 'Reader', icon: BookOpen }, { id: 'findings', label: 'Findings', icon: Highlighter }, { id: 'checklist', label: 'Checklist', icon: ClipboardList }, { id: 'ask', label: 'Ask', icon: MessageSquare }]} onSelect={id => { if (id === 'sources') { setMenuOpen(true); return; } setMobile(id); if (id === 'findings' || id === 'checklist' || id === 'ask') { setRightTab(id); setRightCollapsed(false); } }} />` + text.slice(navEnd);
+const toastStart = text.indexOf('{!!toast && <div className="toast"'); const toastEnd = text.indexOf('</div>}', toastStart) + 7;
+if (toastStart < 0 || toastEnd < 7) throw new Error('Toast markup missing');
+text = text.slice(0, toastStart) + '<ToastStack message={toast} onDismiss={() => setToast(\'\')} />' + text.slice(toastEnd);
+replace('<div className="typing-indicator" role="status"><span /><span /><span /><small>Preparing sample reply</small></div>', '<div className="agent-monitor" role="status"><span className="agent-monitor-mark" aria-hidden="true"><i /><i /><i /></span><div><strong>Reading the selected context</strong><p>Preparing a cited sample reply</p></div></div>');
+replace('<label htmlFor="research-question">What are you looking into?</label><textarea id="research-question" value={question} onChange={e => setQuestion(e.target.value)} placeholder="What is missing or conflicting across these sources?" rows={2} />', '<LabelInput id="research-question" label="What are you looking into?" value={question} onChange={setQuestion} multiline />');
+fs.writeFileSync(path, text);

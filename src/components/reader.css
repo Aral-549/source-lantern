@@ -1,0 +1,68 @@
+.source-reader .reader-tools .reader-page-label {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.source-reader .reader-document-title {
+  margin-bottom: 32px;
+}
+
+.source-reader .reader-document-title > span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.3px;
+}
+
+.source-reader .reader-document-title > h1 {
+  color: var(--text);
+  font-family: 'Source Serif 4', serif;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -.6px;
+}
+
+.source-reader .reader-highlight.highlight-conflict {
+  background: #eaa08a35;
+  border-color: #cf8c78;
+}
+
+.source-reader .reader-highlight.highlight-corroborated {
+  background: #94c7a534;
+  border-color: #8fbaa0;
+}
+
+.source-reader .reader-highlight.highlight-single_source {
+  background: #e9d58e45;
+  border-color: #cfb66d;
+}
+
+.source-reader .reader-highlight.highlight-outdated {
+  background: #f0c38445;
+  border-color: #d7ad6c;
+}
+
+.source-reader .reader-notice > button {
+  margin-left: auto;
+  padding: 3px 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.source-reader .reader-search input {
+  min-height: 25px;
+}
+
+@media (max-width: 520px) {
+  .source-reader .reader-document-title > h1 { font-size: 25px; }
+  .source-reader .reader-tools .reader-page-label { font-size: 9px; }
+  .source-reader .reader-tools { padding-inline: 8px; gap: 6px; }
+  .source-reader .reader-search { gap: 3px; }
+  .source-reader .reader-search input { width: 75px; }
+}

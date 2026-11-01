@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "purpose": "Adversarial E05/E31 cases: a quote must not turn a substring inside a different amount, year, negated word, or unit into sourced evidence.",
+  "cases": [
+    { "id": "TOKEN-REG-001", "source": "The cap is INR 6000000.", "quote": "The cap is INR 600000", "expected": null, "reason": "The quote truncates the source amount by one digit." },
+    { "id": "TOKEN-REG-002", "source": "Deadline year 20260.", "quote": "2026", "expected": null, "reason": "The quote is only a prefix of a different numeric token." },
+    { "id": "TOKEN-REG-003", "source": "Status: nonrenewable.", "quote": "renewable", "expected": null, "reason": "The quote starts inside a negated word and reverses its apparent meaning." },
+    { "id": "TOKEN-REG-004", "source": "Power is 5 MW.", "quote": "Power is 5 M", "expected": null, "reason": "The quote truncates the case-sensitive source unit." },
+    { "id": "TOKEN-REG-005", "source": "The cap is INR 6,00,000.", "quote": "INR 6,00", "expected": null, "reason": "A comma between digits continues a numeric amount, rather than ending the quoted amount." }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "status": "Frozen behavioral expectations; browser review, not an executable test runner",
+  "cases": [
+    {"id":"SCOPE-REG-001","input":"Visit the main landing page","expected":"Describe information-gap research across arbitrary supplied sources; scholarship appears only as an explicitly fictional example; primary action opens a blank general workspace"},
+    {"id":"SCOPE-REG-002","input":"Open a new workspace","expected":"Question prompt and product navigation are domain-neutral; scholarship-specific language is confined to named sample controls and sample content"}
+  ]
+}

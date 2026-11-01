@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.next-production/
+out/
+*.tsbuildinfo
+.env*
+!.env.example
+artifacts/
+dev-server*.log
+*-frontend.zip
+*-submission.zip
+
+/public/ocr/
+.vercel

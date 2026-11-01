@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "purpose": "Independent real DOM Selection and reader-range expectations; offsets are source-wide UTF-16 half-open ranges.",
+  "cases": [
+    { "id": "DOM-REG-001", "name": "Forward selection preserves the second identical passage", "canonicalText": "Ready. Ready.", "html": "<p>Ready. Ready.</p>", "selection": { "anchor": 7, "focus": 12 }, "expected": { "text": "Ready", "charStart": 7, "charEnd": 12 } },
+    { "id": "DOM-REG-002", "name": "Backward selection preserves the same second passage", "canonicalText": "Ready. Ready.", "html": "<p>Ready. Ready.</p>", "selection": { "anchor": 12, "focus": 7 }, "expected": { "text": "Ready", "charStart": 7, "charEnd": 12 } },
+    { "id": "DOM-REG-003", "name": "Reader matching spans inline markup and a BR", "canonicalText": "An income certificate is required.", "html": "<p>An <em>income</em><br><span>certificate</span> is required.</p>", "quote": "An income certificate", "expected": { "rangeStartNodeText": "An ", "rangeStartOffset": 0, "rangeEndNodeText": "certificate", "rangeEndOffset": 11 } },
+    { "id": "DOM-REG-004", "name": "Supplementary Unicode before a selected passage preserves UTF-16 offsets", "canonicalText": "\ud835\udc00 Ready", "html": "<p>\ud835\udc00 Ready</p>", "selection": { "anchor": 3, "focus": 8 }, "expected": { "text": "Ready", "charStart": 3, "charEnd": 8 } },
+    { "id": "DOM-REG-005", "name": "A 1500-character limit preserves a supplementary scalar at the edge", "generator": { "prefix": "a ", "repeat": 749, "bridge": "a\ud835\udc00", "suffix": " tail" }, "expected": { "codePointLength": 1500, "utf16Length": 1501, "charStart": 0, "charEnd": 1501, "lastCharacter": "\ud835\udc00", "truncated": true } },
+    { "id": "DOM-REG-006", "name": "Selections outside the source component never open a passage toolbar", "outsideHtml": "<aside>Outside source text</aside>", "expected": { "selectionCallbacks": 0, "selectionClearCallbacksAtLeast": 1 } },
+    { "id": "DOM-REG-007", "name": "Cross-page selection does not invent one page number", "canonicalText": "First page. Second page.", "html": "<div data-pdf-page=\"1\"><span>First page.</span></div><div data-pdf-page=\"2\"><span> Second page.</span></div>", "expected": { "text": "First page. Second page.", "charStart": 0, "charEnd": 24, "page": null } }
+  ]
+}

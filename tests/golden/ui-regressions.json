@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Independent input-to-expected-output vectors for concrete workspace defects found before browser verification.",
+  "reviewStatus": "Static adversarial review of workspace.tsx and preferences.ts; not executed browser tests.",
+  "frozen": true,
+  "cases": [
+    {
+      "id": "UI-REG-001",
+      "name": "Coverage cell preserves the clicked source",
+      "contracts": ["W24", "E30"],
+      "input": {
+        "state": "Completed scholarship sample Overview",
+        "action": "Activate the Documents required / Scholarship listing conflict cell",
+        "findingEvidenceOrder": ["guidelines", "listing"]
+      },
+      "expected": {
+        "activeSourceId": "listing",
+        "activeFindingId": "income-conflict",
+        "targetQuote": "Income proof: Form 16 or ITR of parents.",
+        "mustNotNavigateToFirstEvidenceFromAnotherSource": true
+      },
+      "observedDefect": "The cell identifies a finding that contains listing evidence, but selectFinding navigates evidence[0], which belongs to guidelines.",
+      "verificationNote": "Source identity comes from the clicked column, independently of finding evidence order."
+    },
+    {
+      "id": "UI-REG-002",
+      "name": "Rejected duplicate source does not create a phantom active tab",
+      "contracts": ["W05", "W07", "W08"],
+      "input": {
+        "existingSources": [{ "id": "existing-source", "url": "https://example.org/guide" }],
+        "activeSourceId": "existing-source",
+        "action": "Add https://example.org/guide again",
+        "newRejectedCandidateId": "duplicate-candidate"
+      },
+      "expected": {
+        "sourceCount": 1,
+        "activeSourceId": "existing-source",
+        "openTabIdsMustNotContain": ["duplicate-candidate"],
+        "duplicateExplanationVisible": true,
+        "existingPreviewRemainsUsable": true
+      },
+      "observedDefect": "addDrafts skips the duplicate in its state updater but then unconditionally opens items[0].input.id, even when that ID was not accepted.",
+      "verificationNote": "The expected active tab must refer to a source actually present in the workspace."
+    },
+    {
+      "id": "UI-REG-003",
+      "name": "Comparison-row quotes have source navigation",
+      "contracts": ["W28", "E30"],
+      "input": {
+        "state": "Income-certificate passage selected in the guidelines",
+        "action": "Choose Check against other sources, then activate evidence in the listing comparison row",
+        "row": { "sourceId": "listing", "quote": "Income proof: Form 16 or ITR of parents." }
+      },
+      "expected": {
+        "evidenceNavigationControlPresent": true,
+        "activeSourceIdAfterActivation": "listing",
+        "targetQuote": "Income proof: Form 16 or ITR of parents.",
+        "notFoundRowsHaveNoInventedEvidenceControl": true
+      },
+      "observedDefect": "sourceComparison renders a title, result, and quote block but no citation or Show in source action.",
+      "verificationNote": "A visible quote alone does not provide the promised one-click inspection path."
+    },
+    {
+      "id": "UI-REG-004",
+      "name": "Product copy does not imply gaps have quoted evidence",
+      "contracts": ["W14", "E29"],
+      "input": { "state": "Welcome screen or sample gap finding", "gapEvidence": [] },
+      "expected": {
+        "provenanceClaim": "Every sourced finding cites a passage",
+        "mustNotClaimEveryFindingHasASource": true,
+        "gapProvenance": "AI suggestion"
+      },
+      "observedDefect": "The welcome promise says Every finding has a source, even though gap findings intentionally have empty evidence.",
+      "verificationNote": "This checks product meaning rather than requiring one particular visual treatment."
+    },
+    {
+      "id": "UI-REG-005",
+      "name": "Rejected local-file read recovers the upload form",
+      "contracts": ["W07", "W11"],
+      "input": {
+        "state": "Upload method with existing valid draft sources",
+        "action": "Select a nonempty TXT file whose local read rejects with NotReadableError"
+      },
+      "expected": {
+        "readFailureExplanationVisible": true,
+        "busyAfterFailure": false,
+        "existingSourcesPreserved": true,
+        "failedFileNotAddedAsReady": true,
+        "subsequentUploadPossible": true,
+        "unhandledPromiseRejection": false
+      },
+      "observedDefect": "The File.text await has no catch/finally; a rejection bypasses setBusy(false) and leaves the upload form stuck.",
+      "verificationNote": "The expected result follows a real browser File API failure path without assuming successful extraction."
+    },
+    {
+      "id": "UI-REG-006",
+      "name": "A stale file read cannot repopulate a reset workspace",
+      "contracts": ["W10", "A05"],
+      "input": {
+        "initialState": "User starts reading a TXT file in an upload form",
+        "actions": ["Start local read", "Choose New analysis before read completes", "Old read resolves"],
+        "newWorkspaceSourcesBeforeResolution": []
+      },
+      "expected": {
+        "newWorkspaceSourcesAfterResolution": [],
+        "oldFileNotAdded": true,
+        "oldFileTabNotOpened": true,
+        "oldPreviewResourcesReleasedIfCreated": true,
+        "newWorkspaceStateUnchanged": true
+      },
+      "observedDefect": "The old SourceForm closure invokes onAdd after awaiting file text without checking whether the form/session has been reset or unmounted.",
+      "verificationNote": "A later read belongs to the session that started it; it does not authorize insertion into a new session."
+    },
+    {
+      "id": "UI-REG-007",
+      "name": "Touch passage toolbar avoids native selection handles",
+      "contracts": ["E27", "W32"],
+      "input": {
+        "pointer": "coarse touch",
+        "viewportWidth": 390,
+        "action": "Select a passage in the upper half of a source page"
+      },
+      "expected": {
+        "toolbarPosition": "Below the selection when space allows",
+        "toolbarWithinViewport": true,
+        "nativeSelectionHandlesRemainUsable": true,
+        "nativeContextMenuSuppressed": false
+      },
+      "observedDefect": "The toolbar uses the same prefer-above calculation for every pointer type and has no touch-specific placement.",
+      "verificationNote": "Actual handle overlap still requires a touch-capable browser check; the missing touch placement is visible in the implementation."
+    },
+    {
+      "id": "UI-REG-008",
+      "name": "Ask action on custom preview explains the unavailable backend",
+      "contracts": ["W09", "W25", "A02"],
+      "input": {
+        "state": "Local custom TXT/PDF preview, with no completed sample analysis",
+        "action": "Select source text and choose Ask about this"
+      },
+      "expected": {
+        "explicitLiveChatNotConnectedExplanation": true,
+        "mustNotSilentlyHideCapturedContextBehindAnEmptyPanel": true,
+        "sampleAnswerForCustomSource": false,
+        "customSourcePreviewPreserved": true
+      },
+      "observedDefect": "addContext accepts the selection and switches Ask, but the !analysis branch renders only the empty assistant panel and hides the composer and captured quote.",
+      "verificationNote": "The sample-first contract permits unavailable live AI; it requires an honest actionable explanation instead of a dead control."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "cases": [
+    { "id": "AUTO-REG-001", "input": "Upload an image and PDF without opening either reader", "expected": "Both sources are prepared automatically, sequentially, with no separate OCR action" },
+    { "id": "AUTO-REG-002", "input": "Automatic reading fails for the first source", "expected": "The second source still runs; the failed source does not loop until explicit retry" },
+    { "id": "AUTO-REG-003", "input": "Remove a source or switch projects while preparation is pending", "expected": "Abort old work and ignore late progress/results; no source is revived or committed to another project" },
+    { "id": "AUTO-REG-004", "input": "An image source has imageUrl without a redundant fileUrl", "expected": "The supported image is queued rather than left waiting forever" },
+    { "id": "AUTO-REG-005", "input": "Progress causes component rerenders", "expected": "The same source worker is not restarted" },
+    { "id": "AUTO-REG-006", "input": "A source is already prepared", "expected": "Do not recognize it again or expose a separate OCR-run action" }
+  ]
+}

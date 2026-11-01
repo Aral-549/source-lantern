@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "purpose": "Independent O03/O07/O09/O11/O13 OCR merge and resource-lifecycle expectations; these do not substitute for real browser recognition integration.",
+  "cases": [
+    { "id": "OCR-REG-001", "input": "Merge OCR output whose source ID or original revision no longer matches", "expected": { "mergeRejects": true, "originalSourceUnchanged": true } },
+    { "id": "OCR-REG-002", "input": "Merge valid recognized text with page dimensions and word boxes", "expected": { "newRevision": true, "originalImageRetained": true, "wordGeometryRetained": true, "ocrLabelAndConfidenceRetained": true } },
+    { "id": "OCR-REG-003", "input": "Recognize only page1 of a3-page scanned document", "expected": { "processedPage": 1, "unprocessedScannedPages": [2, 3], "remainingScannedCount": 2 } },
+    { "id": "OCR-REG-004", "input": "OCR result repeats a page number or references a page beyond the original document", "expected": { "mergeRejects": true, "ambiguousPageProvenanceNotCommitted": true } },
+    { "id": "OCR-REG-005", "input": "The source object revision changes while recognition of the old image is pending", "expected": { "resultRetainsOriginalInputRevision": true, "mergeIntoChangedSourceRejects": true } },
+    { "id": "OCR-REG-006", "input": "A worker logger callback arrives after recognition completed or was cancelled", "expected": { "noFurtherProgressUpdates": true } },
+    { "id": "OCR-REG-007", "input": "A PDF page has usable selectable native text", "expected": { "nativeTextReused": true, "tesseractRecognitionCallsForThatPage": 0, "pageMethod": "native" } },
+    { "id": "OCR-REG-008", "input": "A supported image exceeds the24-megapixel rendering limit or decoding fails", "expected": { "operationRejects": true, "expensiveWorkerNotCreated": true } },
+    { "id": "OCR-REG-009", "input": "Cancel while the local OCR worker is still initializing", "expected": { "abortError": true, "eventuallyCreatedWorkerTerminated": true, "noRecognitionCommitted": true } }
+  ]
+}

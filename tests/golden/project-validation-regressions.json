@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "purpose": "Corrupt local records must produce an actionable validation failure rather than leaking a sorting TypeError or restoring incomplete source identities.",
+  "cases": [
+    { "id": "PROJECT-REG-009", "input": "Two otherwise valid stored projects, with updatedAt missing from one record", "expected": { "readRejectsWithExplicitInvalidRecordMessage": true, "mustNotLeakLocaleCompareTypeError": true } },
+    { "id": "PROJECT-REG-010", "input": "A project draft has matching source IDs but its source revision is missing", "expected": { "saveRejects": true, "malformedSourceIdentityNotPersisted": true } }
+  ]
+}

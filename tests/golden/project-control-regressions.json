@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "cases": [
+    { "id": "NAV-REG-001", "input": "Pinned Alpha followed by unpinned Beta and Gamma", "expected": "Cross-pin-group move controls are disabled; within-group reordering persists" },
+    { "id": "NAV-REG-002", "input": "Keyboard focus moves from project trigger into its details flyout", "expected": "The pending close timer is cancelled and details remain usable" },
+    { "id": "NAV-REG-003", "input": "Press Escape from a focused details-flyout control", "expected": "Flyout closes and keyboard focus returns to its project trigger" },
+    { "id": "NAV-REG-004", "input": "A project operation is pending", "expected": "The flyout cannot start another project-open operation" },
+    { "id": "NAV-REG-005", "input": "Current files folder receives three real loaded source records", "expected": "Accessible count and caption say three documents; displayed names come from those records" },
+    { "id": "NAV-REG-006", "input": "Press Escape in expanded source search", "expected": "Search closes and focus returns to its visible search trigger" },
+    { "id": "NAV-REG-007", "input": "Press Escape in expanded dock Tools", "expected": "Tools close and focus returns to the visible Tools trigger" }
+  ]
+}

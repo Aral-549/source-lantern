@@ -1,0 +1,302 @@
+/* Anara's pane structure, adapted to Digital Dark Spot's light workspace. */
+.project-host .app-shell.app-shell {
+  --desk-paper:#f7f7f7; --desk-surface:#fff; --desk-ink:#242424; --desk-muted:#686868;
+  --desk-rule:#e8e8e8; --desk-accent:#303030; --accent:#303030; --accent-tint:#f0f0f0;
+  --border:#e8e8e8; --text:#242424; --muted:#686868;
+  color:#242424; background:#f7f7f7; font-family:'IBM Plex Sans',sans-serif; font-size:16px;
+}
+.project-host .app-shell.app-shell :is(p,span,button,a,label,small,strong,input,textarea,summary,th,td,blockquote,select,li):not([aria-hidden],[aria-hidden] *,.textLayer *,.react-pdf__Page__textContent *) {
+  font-size:16px!important; font-weight:400!important; letter-spacing:normal!important;
+}
+.project-host .app-shell.app-shell :is(h1,h2,h3) {font-family:'IBM Plex Sans',sans-serif;color:#242424;font-weight:500!important;letter-spacing:-.3px}
+.project-host .app-shell.app-shell :is(button,a,input,textarea,summary):focus-visible {outline:2px solid #4874c7;outline-offset:2px}
+.project-host .app-shell.app-shell .sidebar {width:clamp(230px,var(--sidebar-width),270px);padding:0 8px;background:#f7f7f7;border:0;overflow-y:auto;gap:0}
+.project-host .app-shell.app-shell .sidebar-brand {padding:0 8px;min-height:48px;height:48px;flex-shrink:0}
+.project-host .app-shell.app-shell .brand {gap:8px;color:#252525}
+.project-host .app-shell.app-shell .brand-mark {width:22px;height:22px}
+.project-host .app-shell.app-shell .brand>span {font-weight:500!important;white-space:nowrap;font-size:16px!important}
+.project-host .app-shell.app-shell .primary-nav {order:0;padding:5px 0 16px;border:0;margin:0;flex-shrink:0}
+.project-host .app-shell.app-shell .primary-nav>button {min-height:36px;height:36px;padding:6px 10px;gap:10px;color:#333;border-radius:6px;margin:1px 0}
+.project-host .app-shell.app-shell .primary-nav>button.active {background:#eaeaea;color:#202020}
+.project-host .app-shell.app-shell .primary-nav>button:hover {background:#eeeeee}
+.project-host .app-shell.app-shell .new-analysis-button {display:none}
+.project-host .app-shell.app-shell .project-navigation {padding:0;border:0;flex-shrink:0}
+.project-host .app-shell.app-shell .project-nav-heading {padding:4px 10px;min-height:32px;gap:5px;color:#686868}
+.project-host .app-shell.app-shell .project-nav-heading strong {flex:1;font-size:16px!important;font-weight:500!important}
+.project-host .app-shell.app-shell .project-nav-heading button {width:28px;height:28px;min-height:28px;background:none;border:0}
+.project-host .app-shell.app-shell .project-nav-list {max-height:180px;padding:0;gap:2px}
+.project-host .app-shell.app-shell .project-entry {border:0;border-radius:6px;min-height:36px;background:transparent}
+.project-host .app-shell.app-shell .project-entry.active {background:#e9e9e9;border:0}
+.project-host .app-shell.app-shell .project-open {padding:6px 10px;gap:9px;min-height:36px;color:#343434}
+.project-host .app-shell.app-shell .project-open>svg {width:17px;height:17px;flex-shrink:0}
+.project-host .app-shell.app-shell .project-open>span {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:24px}
+.project-host .app-shell.app-shell .project-save-state {padding:5px 10px;margin:0;color:#707070;line-height:24px}
+.project-host .app-shell.app-shell .project-pin {width:26px;height:28px;color:#707070}
+.project-host .app-shell.app-shell .current-files-folder {display:flex;width:calc(100% - 12px);min-height:36px;height:36px;margin:8px 6px 4px;padding:4px 6px;gap:8px;align-items:center;border:0;background:none;box-shadow:none;border-radius:6px}
+.project-host .app-shell.app-shell .current-files-folder:hover {background:#ededed}
+.project-host .app-shell.app-shell .folder-illustration {width:26px;height:26px;min-width:26px;transform:scale(.42);transform-origin:left center;overflow:visible;margin-right:-12px}
+.project-host .app-shell.app-shell .folder-caption {display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.project-host .app-shell.app-shell .folder-caption>strong {font-weight:500!important;white-space:nowrap}
+.project-host .app-shell.app-shell .folder-caption>span {white-space:nowrap;color:#6b6b6b;margin-left:auto}
+.project-host .app-shell.app-shell .folder-file-names {display:none}
+.project-host .app-shell.app-shell .sidebar-section-heading {padding:8px 10px 4px;min-height:34px;color:#737373;gap:8px;border:0}
+.project-host .app-shell.app-shell .sidebar-section-heading>.icon-button {margin-left:auto;width:26px;height:26px}
+.project-host .app-shell.app-shell .source-list {padding:0;flex:0 1 auto;min-height:0;overflow:auto}
+.project-host .app-shell.app-shell .source-row-wrap {border:0;background:none;border-radius:6px;margin:1px 0}
+.project-host .app-shell.app-shell .source-row-wrap.active {background:#e9e9e9}
+.project-host .app-shell.app-shell .source-row {padding:7px 10px;gap:9px;min-height:38px;border:0;align-items:center}
+.project-host .app-shell.app-shell .source-file-icon {border:0;background:none;color:#686868;width:18px;height:22px;min-width:18px;display:grid;place-items:center}
+.project-host .app-shell.app-shell .source-file-icon>span,.project-host .app-shell.app-shell .source-domain,.project-host .app-shell.app-shell .source-date {display:none}
+.project-host .app-shell.app-shell .source-row-content {gap:0;min-width:0}
+.project-host .app-shell.app-shell .source-row-title {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#363636;line-height:24px}
+.project-host .app-shell.app-shell .finding-count {padding:0;background:none;color:#707070;align-self:center;min-width:16px}
+.project-host .app-shell.app-shell .sidebar-add {padding:8px 10px;min-height:36px;color:#666;gap:9px}
+.project-host .app-shell.app-shell .sidebar-bottom {margin-top:auto;padding-top:20px;border:0;flex-shrink:0}
+.project-host .app-shell.app-shell .sidebar-bottom>button {padding:10px;min-height:36px;color:#666}
+.project-host .app-shell.app-shell .sidebar-profile {display:none}
+.project-host .app-shell.app-shell .workspace-main {padding:0 6px 6px 0;background:#f7f7f7}
+.project-host .app-shell.app-shell .topbar {display:none}
+.project-host .app-shell.app-shell .workspace-body {height:100%;gap:4px;background:#f7f7f7}
+.project-host .app-shell.app-shell .center-pane {background:#fff;border:1px solid #e9e9e9;border-radius:8px;overflow:hidden;min-width:0}
+.project-host .app-shell.app-shell .center-tabbar {height:42px;min-height:42px;background:#f7f7f7;border:0;padding:0 5px;gap:0}
+.project-host .app-shell.app-shell .center-tabs {min-height:42px;gap:4px;overflow-x:auto;scrollbar-width:none;align-items:center}
+.project-host .app-shell.app-shell .document-tab {min-height:32px;height:32px;padding:5px 9px;gap:7px;color:#656565;white-space:nowrap;border:0;border-radius:5px;flex-shrink:0;background:none}
+.project-host .app-shell.app-shell .document-tab.active,.project-host .app-shell.app-shell .document-tab-wrap.active {background:#e9e9e9;border:0;border-radius:5px;color:#222;box-shadow:none}
+.project-host .app-shell.app-shell .document-tab-wrap {height:32px;max-width:240px;border:0;border-radius:5px;flex-shrink:0;align-items:center}
+.project-host .app-shell.app-shell .document-tab-wrap .document-tab {min-width:0;flex:1}
+.project-host .app-shell.app-shell .document-tab>span {max-width:175px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-host .app-shell.app-shell .tabbar-tools {padding:3px 5px;gap:4px;flex-wrap:nowrap}
+.project-host .app-shell.app-shell .export-menu>summary>span {display:none}
+.project-host .app-shell.app-shell .resize-handle {width:4px;background:transparent}
+.project-host .app-shell.app-shell .source-header {padding:8px 16px 4px;background:#fff}
+.project-host .app-shell.app-shell .source-title-row h1 {font-family:'IBM Plex Sans',sans-serif;font-size:18px!important;line-height:1.4;margin:0;font-weight:500!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-host .app-shell.app-shell .source-title-row {gap:8px}
+.project-host .app-shell.app-shell .source-metadata {display:none}
+.project-host .app-shell.app-shell .source-header {position:relative;padding-right:52px}
+.project-host .app-shell.app-shell .source-info {position:absolute;top:8px;right:12px;z-index:12}
+.project-host .app-shell.app-shell .source-info>summary {list-style:none;display:grid;place-items:center;width:28px;height:28px;cursor:pointer;color:#707070}
+.project-host .app-shell.app-shell .source-info[open] .source-metadata {position:absolute;right:0;top:34px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:min(330px,75vw);padding:16px;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 8px 24px #0001;overflow-wrap:anywhere}
+.project-host .app-shell.app-shell .sample-notice,.project-host .app-shell.app-shell .preview-notice {background:#fff;color:#6b6b6b;border:0;padding:4px 16px;min-height:28px;font-size:16px!important;line-height:20px;font-weight:400!important;gap:7px}
+.project-host .app-shell.app-shell .sample-dot {background:#707070}
+.project-host .app-shell.app-shell .compact-source-notice {padding:0 16px;background:#fff;border:0;color:#73613d}
+.project-host .app-shell.app-shell .compact-source-notice>summary {min-height:28px;line-height:20px}
+.project-host .app-shell.app-shell .compact-source-notice>div {padding:8px 0}
+.project-host .app-shell.app-shell .reader-tools {padding:4px 12px;min-height:42px;height:42px;gap:6px;flex-wrap:nowrap;background:#fafafa;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.project-host .app-shell.app-shell .reader-tools-group {flex-wrap:nowrap;gap:4px}
+.project-host .app-shell.app-shell .reader-tool-button {width:28px;height:28px;min-height:28px;min-width:28px;color:#666}
+.project-host .app-shell.app-shell .reader-search {min-width:0;max-width:200px;flex-basis:150px}
+.project-host .app-shell.app-shell .reader-search input {min-height:28px;height:28px;background:transparent;border:0;padding:0 4px}
+.project-host .app-shell.app-shell .reader-stage {padding:18px;background:#f1f1f1}
+.project-host .app-shell.app-shell .reader-article {padding:36px;max-width:800px;border:0;background:#fff;color:#303030;box-shadow:none}
+.project-host .app-shell.app-shell .reader-article :is(p,li) {font-size:17px!important;line-height:1.75;font-weight:400!important}
+.project-host .app-shell.app-shell .right-panel {width:clamp(340px,var(--right-width),440px);border:1px solid #e7e7e7;border-radius:8px;background:#fff;min-width:0;overflow:hidden}
+.project-host .app-shell.app-shell .right-panel-heading {height:42px;min-height:42px;padding:0 14px;border:0;background:#fff}
+.project-host .app-shell.app-shell .right-panel-heading h2 {font-size:16px!important;font-weight:500!important}
+.project-host .app-shell.app-shell .right-panel-heading .assistant-mark,.project-host .app-shell.app-shell .right-panel-heading .subtle-count {display:none}
+.project-host .app-shell.app-shell .analysis-tabs {min-height:36px;height:36px;padding:0 14px;gap:18px;border-bottom:1px solid #eee}
+.project-host .app-shell.app-shell .analysis-tabs>button {min-height:36px;padding:5px 0;gap:5px;color:#747474;border-bottom:2px solid transparent}
+.project-host .app-shell.app-shell .analysis-tabs>button.active {color:#222;border-color:#333}
+.project-host .app-shell.app-shell .analysis-tabs>button.active span {font-weight:500!important}
+.project-host .app-shell.app-shell .analysis-tabs>button svg {display:none}
+.project-host .app-shell.app-shell .analysis-tabs>button>span {background:none;color:#707070;padding:0}
+.project-host .app-shell.app-shell .chat-scroll {padding:20px 22px;flex:1;min-height:0;background:#fff}
+.project-host .app-shell.app-shell .ask-intro {padding:28px 0 0}
+.project-host .app-shell.app-shell .ask-intro>.assistant-mark {display:none}
+.project-host .app-shell.app-shell .ask-intro h3 {font-family:'IBM Plex Sans',sans-serif;font-size:22px!important;font-weight:500!important;color:#242424;margin:0 0 12px;line-height:1.4}
+.project-host .app-shell.app-shell .ask-intro>p {color:#686868;line-height:1.6;margin-bottom:24px}
+.project-host .app-shell.app-shell .ask-intro>button {padding:10px 12px;background:#fafafa;border:1px solid #ededed;border-radius:8px;color:#444;margin:8px 0;line-height:1.45}
+.project-host .app-shell.app-shell .ask-intro>small {color:#707070;line-height:1.5;margin-top:20px}
+.project-host .app-shell.app-shell .chat-message {color:#343434;font-size:16px;line-height:1.65;margin-bottom:24px}
+.project-host .app-shell.app-shell .chat-message>p {line-height:1.65;margin-top:6px}
+.project-host .app-shell.app-shell .message-role {color:#696969;font-weight:500!important}
+.project-host .app-shell.app-shell .message-user>p {background:#f1f1f1;border-radius:12px;padding:12px 14px;color:#303030}
+.project-host .app-shell.app-shell .chat-composer {position:relative;margin:8px 14px 0;padding:12px 12px 10px 38px;background:#f7f7f7;border:1px solid #e7e7e7;border-radius:20px;flex-shrink:0}
+.project-host .app-shell.app-shell .chat-composer>textarea {min-height:48px;max-height:180px;padding:0;background:transparent;color:#333;line-height:1.6;font-weight:400!important}
+.project-host .app-shell.app-shell .chat-attach {position:absolute;left:8px;bottom:12px;width:27px;height:27px;color:#666}
+.project-host .app-shell.app-shell .chat-composer>div:last-child {padding:2px 0 0;gap:6px;flex-wrap:nowrap}
+.project-host .app-shell.app-shell .chat-composer>div:last-child>span {color:#707070;min-width:0;line-height:1.35}
+.project-host .app-shell.app-shell .chat-composer>div:last-child>span svg {display:none}
+.project-host .app-shell.app-shell .chat-composer button[type=submit] {width:30px;height:30px;flex-shrink:0;border-radius:50%;background:#333}
+.project-host .app-shell.app-shell .chat-composer button[type=submit]:disabled {background:#d8d8d8;color:#888}
+.project-host .app-shell.app-shell .custom-chat-composer>div>button {display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#ddd;color:#888;flex-shrink:0}
+.project-host .app-shell.app-shell .custom-chat-composer textarea:disabled {opacity:1;-webkit-text-fill-color:#707070}
+.project-host .app-shell.app-shell .chat-disclaimer {padding:7px 18px 10px;margin:0;color:#707070;line-height:1.4}
+.project-host .app-shell.app-shell .citation {background:#f0f0f0;border-color:#e2e2e2;color:#444;border-radius:5px}
+.project-host .app-shell.app-shell .evidence-strip {padding:8px 16px;background:#fff;display:block;border-bottom:1px solid #eee;color:#666}
+.project-host .app-shell.app-shell .evidence-strip>summary {display:flex;align-items:center;gap:7px;cursor:pointer;list-style:none;line-height:24px}
+.project-host .app-shell.app-shell .evidence-strip>summary>svg:last-child {margin-left:auto}
+.project-host .app-shell.app-shell .evidence-strip>div {margin-top:10px}
+.project-host .app-shell.app-shell .evidence-strip>button {margin:6px 0}
+.project-host .app-shell.app-shell .compact-finding-filters {padding:9px 16px;background:#fff;gap:10px}
+.project-host .app-shell.app-shell .compact-finding-filters>span {color:#707070}
+.project-host .app-shell.app-shell .paper-select-trigger {background:#f5f5f5;color:#333;border:1px solid #e7e7e7;border-radius:6px;min-height:34px;padding:5px 9px}
+.project-host .app-shell.app-shell .findings-scroll {padding:0 16px 16px}
+.project-host .app-shell.app-shell .finding-card {padding:15px 0;border:0;border-bottom:1px solid #eaeaea;border-radius:0;margin:0;background:#fff;box-shadow:none}
+.project-host .app-shell.app-shell .finding-card.selected {background:#fff;border-color:#ddd;box-shadow:none}
+.project-host .app-shell.app-shell .finding-title {margin:9px 0 5px;line-height:1.5;color:#252525}
+.project-host .app-shell.app-shell .finding-title>span {font-weight:500!important}
+.project-host .app-shell.app-shell .finding-detail {line-height:1.6;color:#686868;margin:6px 0}
+.project-host .app-shell.app-shell .finding-card:not(.selected) .finding-detail {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.project-host .app-shell.app-shell .finding-labels {gap:8px}
+.project-host .app-shell.app-shell :is(.status-badge,.provenance) {padding:2px 5px;line-height:21px;border-radius:4px}
+.project-host .app-shell.app-shell .provenance {background:none;color:#707070}
+.project-host .app-shell.app-shell .confidence-reason {line-height:1.6;color:#666}
+.project-host .app-shell.app-shell .evidence-quote {background:#f7f7f7;border:0;border-left:2px solid #ddd;padding:10px 12px;margin:12px 0}
+.project-host .app-shell.app-shell .evidence-quote blockquote {font-family:'IBM Plex Sans',sans-serif;color:#444;line-height:1.6}
+.project-host .app-shell.app-shell .finding-actions {padding-top:10px;margin-top:12px;gap:12px;line-height:1.4}
+.project-host .app-shell.app-shell .panel-scope {padding:9px 16px;min-height:0;background:#fff;color:#707070;border-top:1px solid #eee;line-height:1.4}
+.project-host .app-shell.app-shell .panel-scope br {display:none}
+.project-host .app-shell.app-shell .assistant-empty {display:flex;flex-direction:column;justify-content:center;flex:1;padding:28px 24px}
+.project-host .app-shell.app-shell .assistant-empty-icon {display:none}
+.project-host .app-shell.app-shell .assistant-empty h3 {font-size:22px!important;line-height:1.4}
+.project-host .app-shell.app-shell .assistant-empty>p {color:#686868;line-height:1.6}
+.project-host .app-shell.app-shell .analysis-availability {margin-top:24px;padding-top:16px}
+.project-host .app-shell.app-shell .analysis-availability p {line-height:1.6;color:#686868}
+.project-host .app-shell.app-shell .secondary-button {background:#fff;border:1px solid #dedede;border-radius:6px;color:#333;min-height:36px;padding:8px 12px;box-shadow:none}
+.project-host .app-shell.app-shell .primary-button {background:#303030;border:1px solid #303030;border-radius:6px;color:white;box-shadow:none}
+.project-host .app-shell.app-shell .workspace-home {padding:48px 28px 24px;overflow:auto;flex:1;background:#fff}
+.project-host .app-shell.app-shell .workspace-home h1,.project-host .app-shell.app-shell .workspace-home h2 {font-size:16px!important;font-weight:500!important;color:#666;margin:0 0 14px}
+.project-host .app-shell.app-shell .home-actions {display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.project-host .app-shell.app-shell .home-actions>button {display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:18px;min-height:100px;background:#f6f6f6;border:1px solid #ededed;border-radius:12px;text-align:left;color:#333;transition:background .15s}
+.project-host .app-shell.app-shell .home-actions>button:hover {background:#efefef}
+.project-host .app-shell.app-shell .home-recent {margin-top:38px}
+.project-host .app-shell.app-shell .home-section-heading {display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.project-host .app-shell.app-shell .home-section-heading h2 {margin:0}
+.project-host .app-shell.app-shell .home-file-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.project-host .app-shell.app-shell .home-file-grid>button {display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;min-width:0;padding:16px;border:1px solid #ededed;border-radius:12px;background:#fafafa;color:#555}
+.project-host .app-shell.app-shell .home-file-grid strong {display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#333}
+.project-host .app-shell.app-shell .home-file-grid>button>span {color:#747474}
+.project-host .app-shell.app-shell .home-empty-files {display:flex;width:100%;gap:12px;align-items:center;border:1px dashed #d5d5d5;border-radius:8px;padding:22px;color:#707070;text-align:left}
+.project-host .app-shell.app-shell .home-question {margin-top:32px}
+.project-host .app-shell.app-shell .home-question textarea {font-weight:400!important;min-height:80px;padding:16px;border-radius:8px;background:#fafafa;border-color:#e5e5e5}
+.project-host .app-shell.app-shell .home-demo {margin-top:26px;padding-top:18px;border-top:1px solid #eee;color:#707070;line-height:1.5}
+.project-host .app-shell.app-shell .home-demo p {margin:0 0 8px}
+.project-host .app-shell.app-shell .text-button {color:#555}
+.project-host .app-shell.app-shell .workspace-library {padding:24px;overflow:auto;flex:1;background:#fff}
+.project-host .app-shell.app-shell .library-heading {display:flex;align-items:center;gap:12px;justify-content:space-between}
+.project-host .app-shell.app-shell .library-heading h1 {font-size:22px!important;line-height:1.4}
+.project-host .app-shell.app-shell .workspace-library>p {color:#707070}
+.project-host .app-shell.app-shell .file-table {width:100%;border-collapse:collapse;margin-top:24px;table-layout:fixed}
+.project-host .app-shell.app-shell .file-table th {font-weight:400!important;color:#707070;text-align:left;padding:10px 8px;border-bottom:1px solid #e8e8e8}
+.project-host .app-shell.app-shell .file-table th:first-child {width:60%}
+.project-host .app-shell.app-shell .file-table td {padding:12px 8px;border-bottom:1px solid #efefef;color:#666}
+.project-host .app-shell.app-shell .file-table td button {display:flex;align-items:center;gap:9px;min-width:0;text-align:left;width:100%;color:#333}
+.project-host .app-shell.app-shell .file-table td button span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-host .app-shell.app-shell .file-table td button svg {flex-shrink:0}
+.project-host .app-shell.app-shell .overview-scroll {background:#fff;padding:28px}
+.project-host .app-shell.app-shell .overview-heading>h1 {font-size:26px!important;line-height:1.4}
+.project-host .app-shell.app-shell .overview-heading .eyebrow {display:none}
+.project-host .app-shell.app-shell .coverage-summary {background:#fafafa;border:1px solid #eee;border-radius:8px;box-shadow:none}
+.project-host .app-shell.app-shell .checklist-scroll {padding:12px 20px}
+.project-host .app-shell.app-shell .checklist-item {border-color:#eee;line-height:1.6}
+.project-host .app-shell.app-shell .priority-group h3 {font-size:16px!important;padding:16px 0}
+.project-host .app-shell.app-shell .checklist-progress {padding:18px 20px}
+.project-host .app-shell.app-shell .upload-activity {background:#fff;border-color:#ddd;color:#333;border-radius:10px}
+.project-host .app-shell.app-shell .source-preparation-state {font-size:16px!important;color:#686868;padding:6px 10px}
+.project-host .app-shell.app-shell .current-files-folder .folder-illustration {width:20px;height:24px;min-width:20px;transform:none;margin:0}
+.project-host .app-shell.app-shell .current-files-folder .folder-back,.project-host .app-shell.app-shell .current-files-folder .folder-file-preview {display:none}
+.project-host .app-shell.app-shell .current-files-folder .folder-front {position:static;display:grid;place-items:center;width:20px;height:24px;background:none;border:0;clip-path:none;transform:none;color:#666}
+.project-host .app-shell.app-shell .current-files-folder .folder-front svg {width:18px;height:18px}
+.project-host .app-shell.app-shell .ocr-panel {background:#fff;padding:4px 16px;border-color:#eee}
+.project-host .app-shell.app-shell.left-collapsed .sidebar {width:64px}
+.project-host .app-shell.app-shell.left-collapsed .current-files-folder {justify-content:center;padding:4px}
+.project-host .app-shell.app-shell.left-collapsed .folder-caption {display:none}
+.project-host .app-shell.app-shell.left-collapsed .topbar {display:flex;height:40px;min-height:40px;padding:0 12px}
+body:has(.app-shell) .dialog-content {font-family:'IBM Plex Sans',sans-serif;background:#fff;border:1px solid #e5e5e5;border-radius:12px;color:#333;box-shadow:0 20px 80px #0002}
+body:has(.app-shell) .dialog-content :is(p,span,button,a,label,small,strong,input,textarea,summary,th,td,select,li) {font-size:16px!important;font-weight:400!important}
+body:has(.app-shell) .dialog-heading h2 {font-family:'IBM Plex Sans',sans-serif;font-size:24px;font-weight:500}
+body:has(.app-shell) .dialog-content .paper-upload-zone {border-radius:10px;background:#fafafa;border-color:#ccc}
+body:has(.app-shell) .dialog-content .paper-upload-zone>p:first-of-type {font-family:'IBM Plex Sans',sans-serif;font-size:22px!important}
+body:has(.app-shell) .project-flyout {background:#fff;border:1px solid #e5e5e5;border-radius:8px;color:#444;box-shadow:0 8px 30px #0001}
+@media(min-width:1024px) and (max-width:1279px) {
+  .project-host .app-shell.app-shell .sidebar {width:210px}
+  .project-host .app-shell.app-shell:not(.left-collapsed) .sidebar .sidebar-label,.project-host .app-shell.app-shell:not(.left-collapsed) .brand>span {display:block}
+  .project-host .app-shell.app-shell:not(.left-collapsed) .sidebar .source-row-content {display:flex}
+  .project-host .app-shell.app-shell .sidebar-brand>.icon-button {display:inline-flex}
+  .project-host .app-shell.app-shell .source-row {justify-content:flex-start}
+  .project-host .app-shell.app-shell .right-panel {width:340px}
+  .project-host .app-shell.app-shell .project-open>span {display:block}
+  .project-host .app-shell.app-shell .project-nav-heading>strong {display:block}
+}
+@media(max-width:1023px) {
+  .project-host .app-shell.app-shell {padding-bottom:86px}
+  .project-host .app-shell.app-shell .workspace-main {padding:0}
+  .project-host .app-shell.app-shell .topbar {display:flex;height:44px;min-height:44px;padding:0 12px;background:#f7f7f7}
+  .project-host .app-shell.app-shell .workspace-body {height:calc(100% - 44px);gap:0}
+  .project-host .app-shell.app-shell .center-pane,.project-host .app-shell.app-shell .right-panel {border-radius:0;border:0}
+  .project-host .app-shell.app-shell .right-panel {width:100%}
+  .project-host .app-shell.app-shell .sidebar.is-open {width:min(290px,85vw)!important;padding:0 8px;background:#f7f7f7}
+  .project-host .app-shell.app-shell .sidebar.is-open .sidebar-label {display:block}
+  .project-host .app-shell.app-shell .sidebar.is-open .source-row-content {display:flex}
+  .project-host .app-shell.app-shell .sidebar.is-open .sidebar-brand {padding:0 8px}
+  .project-host .app-shell.app-shell .sidebar-scrim {left:min(290px,85vw);background:#0003}
+  .project-host .app-shell.app-shell .workspace-home {padding:28px 20px}
+  .project-host .app-shell.app-shell .home-actions>button {padding:14px;min-height:92px}
+  .project-host .app-shell.app-shell .workspace-library {padding:20px 12px}
+  .project-host .app-shell.app-shell .library-heading h1 {font-size:20px!important}
+  .project-host .app-shell.app-shell .file-table th:first-child {width:55%}
+  .project-host .app-shell.app-shell .reader-tools {gap:3px;padding:4px 8px;overflow-x:auto}
+  .project-host .app-shell.app-shell .reader-search {flex-basis:130px;flex-shrink:0}
+  .project-host .app-shell.app-shell .reader-article {padding:24px}
+  .project-host .app-shell.app-shell .reader-stage {padding:12px}
+  .project-host .app-shell.app-shell .source-title-row h1 {font-size:18px!important}
+  .project-host .app-shell.app-shell .chat-scroll {padding:20px}
+  .project-host .app-shell.app-shell .ask-intro {padding-top:16px}
+}
+/* Motion references: navigation and tabs adapt expanding-nav; folder sheets adapt folder-files. */
+.project-host .app-shell.app-shell .sidebar{transition:width .2s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .primary-nav>button,.project-host .app-shell.app-shell .project-entry{transition:background-color .16s ease,color .16s ease,transform .16s ease}
+.project-host .app-shell.app-shell .primary-nav>button.active,.project-host .app-shell.app-shell .project-entry.active,.project-host .app-shell.app-shell .source-row-wrap.active,.project-host .app-shell.app-shell .document-tab.active,.project-host .app-shell.app-shell .document-tab-wrap.active{animation:nav-select-in .2s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .current-files-folder .folder-illustration{position:relative;width:34px;height:30px;min-width:34px;margin:0;overflow:visible;perspective:240px}
+.project-host .app-shell.app-shell .current-files-folder .folder-back{display:block;position:absolute;inset:8px 1px 0;background:#dedede;border:1px solid #bdbdbd;border-radius:3px}
+.project-host .app-shell.app-shell .current-files-folder .folder-back:before{content:'';position:absolute;left:-1px;top:-5px;width:14px;height:6px;background:#dedede;border:1px solid #bdbdbd;border-bottom:0;border-radius:3px 3px 0 0}
+.project-host .app-shell.app-shell .current-files-folder .folder-file-preview{display:grid;position:absolute;z-index:calc(3 - var(--file-index));left:7px;right:5px;top:8px;bottom:4px;padding:0;place-items:center;background:#fff;border:1px solid #d2d2d2;border-radius:1px;transform:translateY(calc(var(--file-index) * -1px));transition:transform .24s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .current-files-folder .folder-file-preview svg{display:none}.project-host .app-shell.app-shell .current-files-folder .folder-file-preview>span{font-size:0!important}
+.project-host .app-shell.app-shell .current-files-folder .folder-front{position:absolute;z-index:5;inset:14px 0 0;display:grid;place-items:center;background:#ebebeb;border:1px solid #bdbdbd;border-radius:3px;clip-path:none;transform-origin:bottom;transition:transform .24s cubic-bezier(.2,.8,.2,1);color:#555}
+.project-host .app-shell.app-shell .current-files-folder .folder-front svg{width:17px;height:17px}
+.project-host .app-shell.app-shell .current-files-folder:is(:hover,:focus-visible) .folder-file-preview{transform:translateY(calc(-7px - var(--file-index) * 4px)) rotate(calc((var(--file-index) - 1) * 6deg))}
+.project-host .app-shell.app-shell .current-files-folder:is(:hover,:focus-visible) .folder-front{transform:rotateX(-15deg)}
+.project-host .app-shell.app-shell .chat-message.message-assistant{animation:message-arrive .24s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .paper-select-menu{background:#fff;border:1px solid #dedede;box-shadow:0 12px 30px #00000012;border-radius:7px;animation:menu-unfold .16s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .project-flyout{animation:flyout-arrive .16s cubic-bezier(.2,.8,.2,1)}
+.project-host .app-shell.app-shell .agent-monitor{padding:12px 0;margin:10px 0;border-top:1px solid #eee;border-bottom:1px solid #eee;background:transparent}.project-host .app-shell.app-shell .agent-monitor-mark{background:#ededed;border-color:#dedede}.project-host .app-shell.app-shell .agent-monitor-mark i{background:#505050}
+.project-host .app-shell.app-shell .mobile-nav{background:#fff;border-color:#e7e7e7}.project-host .app-shell.app-shell .mobile-nav>button.active{background:#ededed;color:#222;animation:nav-select-in .2s cubic-bezier(.2,.8,.2,1)}
+@keyframes nav-select-in{from{opacity:.55;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
+@keyframes menu-unfold{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes flyout-arrive{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes message-arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1024px) and (max-width:1279px){.project-host .app-shell.app-shell:not(.left-collapsed) .project-open>span,.project-host .app-shell.app-shell:not(.left-collapsed) .project-nav-heading>strong,.project-host .app-shell.app-shell:not(.left-collapsed) .project-save-state{display:block!important}.project-host .app-shell.app-shell:not(.left-collapsed) .project-open{justify-content:flex-start!important}.project-host .app-shell.app-shell:not(.left-collapsed) .project-navigation{padding:0!important}.project-host .app-shell.app-shell:not(.left-collapsed) .project-nav-heading{flex-wrap:nowrap!important}}
+@media(prefers-reduced-motion:reduce){.project-host .app-shell.app-shell *,.project-host .app-shell.app-shell *:before,.project-host .app-shell.app-shell *:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Des1gn field-report palette: tinted charcoal ground, warm text, cobalt for intent. */
+.project-host .app-shell.app-shell {--desk-paper:#14161f;--desk-surface:#1a1d25;--desk-ink:#f3f0e9;--desk-muted:#b2b5be;--desk-rule:rgb(243 240 233 / 15%);--desk-accent:#1f23c4;--accent:#1f23c4;--accent-tint:rgb(31 35 196 / 22%);--border:rgb(243 240 233 / 15%);--text:#f3f0e9;--muted:#b2b5be;background:#11131a;color:#f3f0e9}
+.project-host .app-shell.app-shell :is(.sidebar,.topbar,.center-tabbar,.right-panel,.workspace-home,.workspace-library,.overview-scroll,.chat-scroll,.findings-scroll,.checklist-scroll,.source-reader-container,.reader-tools,.source-header,.analysis-tabs,.right-panel-heading,.panel-scope,.evidence-strip){background-color:#171a22;border-color:rgb(243 240 233 / 15%);color:#f3f0e9}
+.project-host .app-shell.app-shell .sidebar{background:#14161f;border-color:rgb(243 240 233 / 15%)}.project-host .app-shell.app-shell .workspace-main,.project-host .app-shell.app-shell .workspace-body,.project-host .app-shell.app-shell .center-pane{background:#11131a}.project-host .app-shell.app-shell .right-panel{background:#171a22;border-radius:0}.project-host .app-shell.app-shell .topbar,.project-host .app-shell.app-shell .center-tabbar{background:#171a22}
+.project-host .app-shell.app-shell :is(.brand,.workspace-switcher,.sidebar-section-heading,.source-row,.source-row-title,.source-domain,.source-date,.sidebar-add,.sidebar-bottom>button,.project-open,.project-nav-heading,.breadcrumb,.local-label,.document-tab,.right-panel-heading h2,.analysis-tabs>button,.chat-message,.message-role,.findings-heading,.finding-title,.finding-detail,.panel-scope,.workspace-library>p,.file-table td,.file-table td button,.file-table th,.workspace-home h1,.workspace-home h2,.home-file-grid strong,.home-file-grid>button>span,.ask-intro h3,.ask-intro>p,.assistant-empty h3,.assistant-empty>p){color:#f3f0e9}
+.project-host .app-shell.app-shell :is(h1,h2,h3){color:#f3f0e9}
+.project-host .app-shell.app-shell .checklist-item>label,.project-host .app-shell.app-shell .priority-group h3{color:#f3f0e9}.project-host .app-shell.app-shell :is(.checklist-item>p,.checklist-item small,.checklist-progress>p,.checklist-progress>div,.checklist-finding-link){color:#b2b5be}
+.project-host .app-shell.app-shell :is(.eyebrow,.sidebar-section-heading,.source-domain,.source-date,.breadcrumb-root,.breadcrumb-divider,.local-label,.document-tab:not(.active),.analysis-tabs>button:not(.active),.workspace-library>p,.file-table th,.home-file-grid>button>span,.ask-intro>p,.assistant-empty>p,.chat-disclaimer,.panel-scope,.finding-detail,.provenance,.message-role){color:#b2b5be}
+.project-host .app-shell.app-shell :is(.primary-nav>button,.project-entry,.source-row-wrap,.document-tab,.home-actions>button,.home-file-grid>button,.ask-intro>button,.secondary-button,.small-button,.paper-select-trigger,.question-card,.coverage-summary,.checklist-item,.upload-activity,.current-files-folder,.evidence-quote,.citation,.chat-composer,.message-user>p,.paper-select-menu){background:#1e222b;border-color:rgb(243 240 233 / 15%);color:#f3f0e9;box-shadow:none}
+.project-host .app-shell.app-shell :is(.primary-nav>button.active,.project-entry.active,.source-row-wrap.active,.document-tab.active,.analysis-tabs>button.active,.home-actions>button:hover,.home-file-grid>button:hover){background:#20265a;color:#f3f0e9;border-color:rgb(111 125 255 / 58%)}.project-host .app-shell.app-shell :is(.primary-button,.chat-composer button[type=submit]){background:#1f23c4;border-color:#1f23c4;color:#fff}.project-host .app-shell.app-shell :is(.primary-button:hover:not(:disabled),.chat-composer button[type=submit]:hover:not(:disabled)){background:#3438df}
+.project-host .app-shell.app-shell .chat-composer{background:#1e222b;border-radius:4px}.project-host .app-shell.app-shell .chat-composer>textarea,.project-host .app-shell.app-shell .question-card>textarea,.project-host .app-shell.app-shell .text-input{background:transparent;color:#f3f0e9}.project-host .app-shell.app-shell .chat-composer>textarea::placeholder,.project-host .app-shell.app-shell .question-card>textarea::placeholder{color:#a7abb6}
+.project-host .app-shell.app-shell :is(.tabbar-tools,.popover-content,.sample-notice,.unread-notice){background:#171a22;border-color:rgb(243 240 233 / 15%);color:#f3f0e9}
+.project-host .app-shell.app-shell .reader-stage{background:#0e1015}.project-host .app-shell.app-shell .reader-article{background:#faf8f3;color:#14161f;border-color:#e2ddd4}.project-host .app-shell.app-shell .reader-article :is(h1,h2,h3,p,li,strong,blockquote){color:#14161f}.project-host .app-shell.app-shell .source-file-icon,.project-host .app-shell.app-shell .file-table td button svg{color:#b8c0ff;border-color:rgb(184 192 255 / 38%);background:#20265a}
+.project-host .app-shell.app-shell .current-files-folder .folder-back{background:#2a3175;border-color:#6f7dff}.project-host .app-shell.app-shell .current-files-folder .folder-back:before{background:#2a3175;border-color:#6f7dff}.project-host .app-shell.app-shell .current-files-folder .folder-front{background:#242b63;border-color:#6f7dff;color:#e8eaff}.project-host .app-shell.app-shell .current-files-folder .folder-file-preview{background:#f3f0e9;border-color:#c9c5bd}
+body:has(.app-shell) .dialog-content,body:has(.app-shell) .project-flyout{background:#1e222b;border-color:rgb(243 240 233 / 20%);color:#f3f0e9;box-shadow:0 18px 45px rgb(0 0 0 / 35%)}body:has(.app-shell) .dialog-content :is(p,span,button,a,label,small,strong,input,textarea,summary,th,td,select,li),body:has(.app-shell) .project-flyout :is(p,span,button,a,label,small,strong){color:inherit}body:has(.app-shell) .dialog-content .paper-upload-zone{background:#171a22;border-color:rgb(243 240 233 / 26%)}
+
+/* Anara-like pane controls: a 12px hit target, visible grab rail, and keyboard focus. */
+.project-host .app-shell.app-shell .resize-handle{width:12px;background:transparent;z-index:30;isolation:isolate;outline:none}.project-host .app-shell.app-shell .resize-handle::before{inset:0;z-index:-1;background:transparent}.project-host .app-shell.app-shell .resize-handle::after{content:'\22ee';position:absolute;top:50%;left:50%;display:grid;place-items:center;width:22px;height:44px;transform:translate(-50%,-50%);border:1px solid transparent;border-radius:3px;background:#1e222b;color:#858b9a;font-size:18px;line-height:1;letter-spacing:-2px;transition:color .16s ease,background-color .16s ease,border-color .16s ease,transform .16s cubic-bezier(.16,1,.3,1)}.project-host .app-shell.app-shell .resize-handle:hover::after,.project-host .app-shell.app-shell .resize-handle:focus-visible::after,.project-host .app-shell.app-shell .resize-handle:active::after{background:#20265a;border-color:#6f7dff;color:#f3f0e9;transform:translate(-50%,-50%) scale(1.06)}.project-host .app-shell.app-shell .resize-handle:focus-visible{outline:2px solid #6f7dff;outline-offset:-2px}
+@media(max-width:1023px){.project-host .app-shell.app-shell :is(.topbar,.center-tabbar,.sidebar.is-open,.mobile-nav){background:#171a22}.project-host .app-shell.app-shell .sidebar-scrim{background:rgb(0 0 0 / 55%)}}
+@media(min-width:1024px){.project-host .app-shell.app-shell .left-resize{display:block}}
+@media(min-width:1024px) and (max-width:1279px){.project-host .app-shell.app-shell .sidebar{width:clamp(200px,var(--sidebar-width),320px)}.project-host .app-shell.app-shell .right-panel{width:clamp(320px,var(--right-width),520px)}}
+
+/* Source Lantern is deliberately light-only: paper, ink, and cobalt intent. */
+.project-host .app-shell.app-shell{--desk-paper:#faf8f3;--desk-surface:#fff;--desk-ink:#14161f;--desk-muted:#4a4f5c;--desk-rule:rgb(20 22 31 / 12%);--desk-accent:#1f23c4;--accent:#1f23c4;--accent-tint:rgb(31 35 196 / 10%);--border:rgb(20 22 31 / 12%);--text:#14161f;--muted:#4a4f5c;background:#faf8f3;color:#14161f}
+.project-host .app-shell.app-shell :is(.sidebar,.topbar,.center-tabbar,.right-panel,.workspace-home,.workspace-library,.overview-scroll,.chat-scroll,.findings-scroll,.checklist-scroll,.source-reader-container,.reader-tools,.source-header,.analysis-tabs,.right-panel-heading,.panel-scope,.evidence-strip){background-color:#fff;border-color:rgb(20 22 31 / 12%);color:#14161f}.project-host .app-shell.app-shell .sidebar{background:#f2efe8}.project-host .app-shell.app-shell .workspace-main,.project-host .app-shell.app-shell .workspace-body{background:#faf8f3}.project-host .app-shell.app-shell .center-pane{background:#fff}.project-host .app-shell.app-shell .topbar,.project-host .app-shell.app-shell .center-tabbar{background:#faf8f3}.project-host .app-shell.app-shell .right-panel{background:#fff}
+.project-host .app-shell.app-shell :is(.brand,.workspace-switcher,.sidebar-section-heading,.source-row,.source-row-title,.source-domain,.source-date,.sidebar-add,.sidebar-bottom>button,.project-open,.project-nav-heading,.breadcrumb,.local-label,.document-tab,.right-panel-heading h2,.analysis-tabs>button,.chat-message,.message-role,.findings-heading,.finding-title,.finding-detail,.panel-scope,.workspace-library>p,.file-table td,.file-table td button,.file-table th,.workspace-home h1,.workspace-home h2,.home-file-grid strong,.home-file-grid>button>span,.ask-intro h3,.ask-intro>p,.assistant-empty h3,.assistant-empty>p,.checklist-item>label,.priority-group h3,.checklist-item>p,.checklist-item small,.checklist-progress>p,.checklist-progress>div,.checklist-finding-link,h1,h2,h3){color:#14161f}
+.project-host .app-shell.app-shell :is(.eyebrow,.sidebar-section-heading,.source-domain,.source-date,.breadcrumb-root,.breadcrumb-divider,.local-label,.document-tab:not(.active),.analysis-tabs>button:not(.active),.workspace-library>p,.file-table th,.home-file-grid>button>span,.ask-intro>p,.assistant-empty>p,.chat-disclaimer,.panel-scope,.finding-detail,.provenance,.message-role,.checklist-item>p,.checklist-item small,.checklist-progress>p,.checklist-finding-link){color:#4a4f5c}
+.project-host .app-shell.app-shell :is(.primary-nav>button,.project-entry,.source-row-wrap,.document-tab,.home-actions>button,.home-file-grid>button,.ask-intro>button,.secondary-button,.small-button,.paper-select-trigger,.question-card,.coverage-summary,.checklist-item,.upload-activity,.current-files-folder,.evidence-quote,.citation,.chat-composer,.message-user>p,.paper-select-menu){background:#fff;border-color:rgb(20 22 31 / 12%);color:#14161f;box-shadow:none}.project-host .app-shell.app-shell :is(.primary-nav>button.active,.project-entry.active,.source-row-wrap.active,.document-tab.active,.analysis-tabs>button.active,.home-actions>button:hover,.home-file-grid>button:hover){background:rgb(31 35 196 / 10%);color:#1f23c4;border-color:rgb(31 35 196 / 32%)}.project-host .app-shell.app-shell :is(.primary-button,.chat-composer button[type=submit]){background:#1f23c4;border-color:#1f23c4;color:#fff}.project-host .app-shell.app-shell :is(.primary-button:hover:not(:disabled),.chat-composer button[type=submit]:hover:not(:disabled)){background:#3438df}
+.project-host .app-shell.app-shell .chat-composer{background:#fff;border-radius:4px}.project-host .app-shell.app-shell .chat-composer>textarea,.project-host .app-shell.app-shell .question-card>textarea,.project-host .app-shell.app-shell .text-input{background:transparent;color:#14161f}.project-host .app-shell.app-shell .chat-composer>textarea::placeholder,.project-host .app-shell.app-shell .question-card>textarea::placeholder{color:#4a4f5c}.project-host .app-shell.app-shell :is(.tabbar-tools,.popover-content,.sample-notice,.unread-notice){background:#fff;border-color:rgb(20 22 31 / 12%);color:#14161f}
+.project-host .app-shell.app-shell .reader-stage{background:#f2efe8}.project-host .app-shell.app-shell .reader-article{background:#faf8f3;color:#14161f;border-color:#e2ddd4}.project-host .app-shell.app-shell .reader-article :is(h1,h2,h3,p,li,strong,blockquote){color:#14161f}.project-host .app-shell.app-shell .source-file-icon,.project-host .app-shell.app-shell .file-table td button svg{color:#1f23c4;border-color:rgb(31 35 196 / 24%);background:rgb(31 35 196 / 8%)}.project-host .app-shell.app-shell .current-files-folder .folder-back,.project-host .app-shell.app-shell .current-files-folder .folder-back:before{background:#dce0ff;border-color:#1f23c4}.project-host .app-shell.app-shell .current-files-folder .folder-front{background:#c8ceff;border-color:#1f23c4;color:#1f23c4}.project-host .app-shell.app-shell .current-files-folder .folder-file-preview{background:#fff;border-color:#d8d6cf}
+body:has(.app-shell) .dialog-content,body:has(.app-shell) .project-flyout{background:#fff;border-color:rgb(20 22 31 / 16%);color:#14161f;box-shadow:0 18px 45px rgb(20 22 31 / 18%)}body:has(.app-shell) .dialog-content .paper-upload-zone{background:#faf8f3;border-color:rgb(20 22 31 / 20%)}
+.project-host .app-shell.app-shell .resize-handle::after{background:#fff;color:#4a4f5c}.project-host .app-shell.app-shell .resize-handle:hover::after,.project-host .app-shell.app-shell .resize-handle:focus-visible::after,.project-host .app-shell.app-shell .resize-handle:active::after{background:rgb(31 35 196 / 10%);border-color:#1f23c4;color:#1f23c4}.project-host .app-shell.app-shell .resize-handle:focus-visible{outline-color:#1f23c4}@media(max-width:1023px){.project-host .app-shell.app-shell :is(.topbar,.center-tabbar,.sidebar.is-open,.mobile-nav){background:#fff}.project-host .app-shell.app-shell .sidebar-scrim{background:rgb(20 22 31 / 28%)}}

@@ -1,0 +1,286 @@
+{
+  "name": "Sample frontend honesty and partial-source regressions",
+  "version": 1,
+  "status": "Frozen expected-output vectors for later runnable tests",
+  "review": {
+    "reviewer": "Independent adversarial review agent",
+    "human_contract_review": "Pending",
+    "implementation_tests": "Not run; no implementation or test runner exists",
+    "basis": "Self-contained fictional source snapshots checked directly against each expected output. These snapshots are not extracted real documents and do not satisfy the real-input integration requirement."
+  },
+  "fixtures": {
+    "analysis_mode": "sample",
+    "sample_label": "Sample demo: fictional sources for illustration.",
+    "question": "What should I verify before applying for the Nova Merit Scholarship?",
+    "sources": [
+      {
+        "id": "reg-guidelines",
+        "revision": "reg-v1",
+        "title": "Fictional Nova Merit Scholarship guidelines",
+        "published_at": "2026-02-02",
+        "trust": "official",
+        "trust_origin": "Fictional sample metadata; not an authenticated organization",
+        "blocks": [
+          {
+            "id": "eligibility",
+            "text": "Applicants must be aged 17-25 and be Indian citizens."
+          },
+          {
+            "id": "documents",
+            "text": "Family income must be below INR 6,00,000. Submit an income certificate issued within the last 6 months."
+          },
+          {
+            "id": "deadline",
+            "text": "The application deadline is 30 November 2026."
+          },
+          {
+            "id": "amount",
+            "text": "The scholarship amount is INR 50,000 per year."
+          }
+        ],
+        "unread_content": [
+          {
+            "kind": "image",
+            "description": "Decorative banner not analyzed as text"
+          }
+        ]
+      },
+      {
+        "id": "reg-listing",
+        "revision": "reg-v1",
+        "title": "Fictional scholarship listing",
+        "published_at": null,
+        "trust": "unknown",
+        "blocks": [
+          {
+            "id": "eligibility",
+            "text": "Applicants must be aged 17-25 and be Indian citizens."
+          },
+          {
+            "id": "documents",
+            "text": "Income proof: Form 16 or ITR of parents."
+          },
+          {
+            "id": "deadline",
+            "text": "Applications close at the end of November."
+          }
+        ],
+        "unread_content": []
+      },
+      {
+        "id": "reg-blog",
+        "revision": "reg-v1",
+        "title": "Fictional student blog",
+        "published_at": null,
+        "cycle_label": "2025 application cycle",
+        "trust": "blog",
+        "blocks": [
+          {
+            "id": "cycle",
+            "text": "For the 2025 application cycle, the deadline was 30 November 2025."
+          },
+          {
+            "id": "amount",
+            "text": "The amount is INR 50,000. Apply through the portal."
+          }
+        ],
+        "unread_content": []
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "DEMO-REG-001",
+      "title": "Unprepared question must not become a false absence claim",
+      "contracts": [
+        "contracts/frontend-workspace.md#W27",
+        "contracts/analysis-adapter.md#A21"
+      ],
+      "input": {
+        "sources": "All three fixture sources are readable",
+        "prepared_reply_topics": ["income documents", "deadline"],
+        "user_question": "What is the age limit?",
+        "selected_contexts": []
+      },
+      "expected_output": {
+        "reply_text": "This sample demo has no prepared answer to that question",
+        "must_not_claim_information_absent": true,
+        "must_not_use_not_found_wording": true,
+        "must_not_invent_a_prepared_factual_reply": true,
+        "sample_label_remains_visible": true
+      },
+      "verification_notes": "The guidelines and listing eligibility blocks both explicitly contain 17-25. Lack of a prepared reply therefore cannot justify saying the age limit was not found."
+    },
+    {
+      "id": "DEMO-REG-002",
+      "title": "Checked missing renewal topic may use scoped not-found wording",
+      "contracts": [
+        "contracts/frontend-workspace.md#W14",
+        "contracts/frontend-workspace.md#W15",
+        "contracts/analysis-adapter.md#A13",
+        "contracts/analysis-adapter.md#A21",
+        "contracts/evidence-navigation.md#E29"
+      ],
+      "input": {
+        "sources": "All three fixture sources are readable",
+        "action": "Open the prepared renewal-conditions gap",
+        "checked_missing_topic": "Renewal conditions"
+      },
+      "expected_output": {
+        "finding_category": "Gap",
+        "provenance_label": "AI suggestion",
+        "scope_text": "Not found in the text of 3 sources reviewed",
+        "reviewed_source_count": 3,
+        "evidence": [],
+        "highlight_targets": [],
+        "unread_image_notice_visible": true,
+        "must_not_claim_no_renewal_policy_exists": true,
+        "next_check_suggestion": "Check the latest official renewal policy",
+        "next_check_provenance": "AI suggestion",
+        "sample_label_remains_visible": true
+      },
+      "verification_notes": "Every fixture text block was checked; none describes renewal conditions. The unprocessed banner cannot be treated as reviewed evidence, so the absence claim is expressly limited to text."
+    },
+    {
+      "id": "DEMO-REG-003",
+      "title": "Zero readable sources produces failure rather than empty-corpus findings",
+      "contracts": [
+        "contracts/frontend-workspace.md#W11",
+        "contracts/frontend-workspace.md#W40",
+        "contracts/analysis-adapter.md#A14",
+        "contracts/analysis-adapter.md#A23",
+        "contracts/analysis-adapter.md#A27"
+      ],
+      "input": {
+        "question": "Use the fixture research question",
+        "staged_source_ids": ["reg-guidelines", "reg-listing", "reg-blog"],
+        "demo_state": "Explicitly labelled simulated source-reading failures",
+        "source_outcomes": [
+          {"source_id": "reg-guidelines", "status": "failed", "reason": "Demo read failure"},
+          {"source_id": "reg-listing", "status": "failed", "reason": "Demo read failure"},
+          {"source_id": "reg-blog", "status": "failed", "reason": "Demo read failure"}
+        ]
+      },
+      "expected_output": {
+        "result": "Source-reading failure",
+        "reviewed_source_count": 0,
+        "summary": [],
+        "findings": [],
+        "gaps": [],
+        "coverage_result": null,
+        "coverage_score_visible": false,
+        "source_failure_reasons_visible": true,
+        "recovery_actions": ["Retry", "Paste text instead", "Upload file"],
+        "source_inputs_preserved": true,
+        "must_not_make_not_found_claims": true,
+        "must_not_show_successful_sample_results": true
+      },
+      "verification_notes": "Three inputs satisfy initial source-count validation, but none is readable after the simulated failures. No corpus was reviewed, and the normal three-source fixture totals cannot survive this failure state."
+    },
+    {
+      "id": "DEMO-REG-004",
+      "title": "One readable source suppresses cross-source findings and comparisons",
+      "contracts": [
+        "contracts/frontend-workspace.md#W41",
+        "contracts/analysis-adapter.md#A14",
+        "contracts/analysis-adapter.md#A28"
+      ],
+      "input": {
+        "question": "Use the fixture research question",
+        "staged_source_ids": ["reg-guidelines", "reg-listing", "reg-blog"],
+        "demo_state": "Explicitly labelled simulated partial source-reading failure",
+        "source_outcomes": [
+          {"source_id": "reg-guidelines", "status": "ready"},
+          {"source_id": "reg-listing", "status": "failed", "reason": "Demo read failure"},
+          {"source_id": "reg-blog", "status": "failed", "reason": "Demo read failure"}
+        ],
+        "candidate_findings_before_validation": [
+          {"id": "reg-age-agreement", "type": "corroborated", "source_ids": ["reg-guidelines", "reg-listing"]},
+          {"id": "reg-document-conflict", "type": "conflict", "source_ids": ["reg-guidelines", "reg-listing"]},
+          {"id": "reg-income-ceiling", "type": "single_source", "source_ids": ["reg-guidelines"]}
+        ],
+        "additional_action": "Check against other sources"
+      },
+      "expected_output": {
+        "result": "Explicit partial analysis",
+        "reviewed_source_count": 1,
+        "reviewed_source_ids": ["reg-guidelines"],
+        "coverage_label": "Partial",
+        "allowed_source_ids_for_summary_and_evidence": ["reg-guidelines"],
+        "corroborated_findings": [],
+        "conflict_findings": [],
+        "cross_source_comparison_rows": [],
+        "cross_source_comparison_suppressed": true,
+        "supported_single_source_observation_may_remain": "Family income must be below INR 6,00,000.",
+        "any_gap_scope": "The text of the one reviewed source",
+        "must_not_reuse_full_sample_totals": true,
+        "must_not_cite_failed_sources": true,
+        "sample_label_remains_visible": true
+      },
+      "verification_notes": "Only the guidelines remain readable. The income ceiling appears verbatim there. Both candidate cross-source findings depend on the failed listing and must be suppressed, even though its fixture text is still known to the test author."
+    },
+    {
+      "id": "DEMO-REG-005",
+      "title": "Structured summary exposes cited facts and qualified differences",
+      "contracts": [
+        "contracts/frontend-workspace.md#W39",
+        "contracts/analysis-adapter.md#A29",
+        "contracts/evidence-navigation.md#E01",
+        "contracts/evidence-navigation.md#E30"
+      ],
+      "input": {
+        "sources": "All three fixture sources are readable",
+        "action": "Open the completed sample Overview, then activate each summary citation"
+      },
+      "expected_output": {
+        "section_heading": "What the sources say",
+        "distinct_from_coverage_and_findings": true,
+        "required_summary_topics": ["Eligibility", "Required documents", "Deadline", "Amount"],
+        "citation_navigation": [
+          {
+            "topic": "Eligibility",
+            "source_id": "reg-guidelines",
+            "source_revision": "reg-v1",
+            "block_id": "eligibility",
+            "quote": "Applicants must be aged 17-25 and be Indian citizens."
+          },
+          {
+            "topic": "Required documents",
+            "source_id": "reg-guidelines",
+            "source_revision": "reg-v1",
+            "block_id": "documents",
+            "quote": "Submit an income certificate issued within the last 6 months."
+          },
+          {
+            "topic": "Required documents",
+            "source_id": "reg-listing",
+            "source_revision": "reg-v1",
+            "block_id": "documents",
+            "quote": "Income proof: Form 16 or ITR of parents."
+          },
+          {
+            "topic": "Deadline",
+            "source_id": "reg-guidelines",
+            "source_revision": "reg-v1",
+            "block_id": "deadline",
+            "quote": "The application deadline is 30 November 2026."
+          },
+          {
+            "topic": "Amount",
+            "source_id": "reg-guidelines",
+            "source_revision": "reg-v1",
+            "block_id": "amount",
+            "quote": "The scholarship amount is INR 50,000 per year."
+          }
+        ],
+        "each_citation_opens_its_own_source_and_passage": true,
+        "document_difference_explanation_label": "AI suggestion",
+        "document_difference_uncertainty": "Possible conflict; confirm the current official document list",
+        "must_not_declare_a_source_the_winner": true,
+        "must_not_claim_textual_presence_proves_truth": true,
+        "sample_label_remains_visible": true
+      },
+      "verification_notes": "Each expected quote was compared character-for-character with its named source block. The two document requirements differ, but those textual differences do not establish a definitive contradiction or which requirement is current. Citation activation must preserve source ID and revision rather than finding a similar phrase elsewhere."
+    }
+  ]
+}

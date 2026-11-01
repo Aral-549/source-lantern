@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "purpose": "Text contrast regressions independently observed in the running app. Ordinary UI text must meet at least4.5:1 against its rendered background.",
+  "minimumTextContrast": 4.5,
+  "cases": [
+    {
+      "id": "A11Y-REG-001",
+      "name": "Finding detail text remains readable on its card",
+      "contracts": ["W32", "W33"],
+      "observedPair": { "foreground": [146, 157, 175], "background": [254, 254, 255], "approximateRatio": 2.72 },
+      "html": "<article class=\"finding-card\"><p class=\"finding-detail\">An explanation worth reading.</p></article>",
+      "textSelector": ".finding-detail",
+      "expected": { "minimumContrastRatio": 4.5 }
+    },
+    {
+      "id": "A11Y-REG-002",
+      "name": "Source domain text remains readable in a selected source row",
+      "contracts": ["W32", "W33"],
+      "observedPair": { "foreground": [125, 135, 149], "background": [234, 240, 252], "approximateRatio": 3.18 },
+      "html": "<div class=\"source-row-wrap active\"><button class=\"source-row\"><span class=\"source-row-content\"><span class=\"source-domain\">Source origin</span></span></button></div>",
+      "textSelector": ".source-domain",
+      "expected": { "minimumContrastRatio": 4.5 }
+    }
+  ],
+  "verificationScope": "Executable DOM stylesheet checks cover these text/background pairs. Parent browser audit covers actual computed colors, other text roles, font sizes, and responsive layout. This file does not claim all app contrast pairs have been tested."
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "purpose": "Independent fixed evidence-location expectations from reviewed E01-E09 and E31-E32; expected original offsets are UTF-16 half-open ranges.",
+  "cases": [
+    { "id": "QUOTE-001", "source": "Prefix: annual  award.", "quote": "annual award", "expected": { "start": 8, "end": 21, "original": "annual  award" } },
+    { "id": "QUOTE-002", "source": "Annual require-\nments apply.", "quote": "requirements", "expected": { "start": 7, "end": 21, "original": "require-\nments" } },
+    { "id": "QUOTE-003", "source": "odd \ufb01 \ufb02 end", "quote": "fi fl", "expected": { "start": 4, "end": 7, "original": "\ufb01 \ufb02" } },
+    { "id": "QUOTE-004", "source": "Soft\u00adhyphen", "quote": "Softhyphen", "expected": { "start": 0, "end": 11, "original": "Soft\u00adhyphen" } },
+    { "id": "QUOTE-005", "source": "It is \u201cpossible\u201d.", "quote": "\"possible\"", "expected": { "start": 6, "end": 16, "original": "\u201cpossible\u201d" } },
+    { "id": "QUOTE-006", "source": "The limit is 5 mW.", "quote": "5 MW", "expected": null },
+    { "id": "QUOTE-007", "source": "Applicants must not pay a fee.", "quote": "Applicants must pay a fee.", "expected": null },
+    { "id": "QUOTE-008", "source": "The deadline is 30 November 2026.", "quote": "The deadline is 30 November 2025.", "expected": null },
+    { "id": "QUOTE-009", "source": "Income is below INR 6,00,000.", "quote": "Income is below INR 8,00,000.", "expected": null },
+    { "id": "QUOTE-010", "source": "Ready. Ready. Ready.", "quote": "Ready", "options": { "startHint": 6 }, "expected": { "start": 7, "end": 12, "original": "Ready" } },
+    { "id": "QUOTE-011", "source": "Ready. Ready. Ready.", "quote": "Ready", "options": { "startHint": 18 }, "expected": null },
+    { "id": "QUOTE-012", "source": "Income certificate required.", "quote": "Income certificate", "options": { "charStart": -2, "charEnd": 4 }, "expected": { "start": 0, "end": 18, "original": "Income certificate" } },
+    { "id": "QUOTE-013", "source": "No. Income certificate required.", "quote": "Income certificate", "options": { "charStart": 0, "charEnd": 3 }, "expected": { "start": 4, "end": 22, "original": "Income certificate" } },
+    { "id": "QUOTE-014", "source": "income-certificate", "quote": "incomecertificate", "expected": null },
+    { "id": "QUOTE-015", "source": "Text with content", "quote": "   \n", "expected": null },
+    { "id": "QUOTE-016", "source": "Text with content", "quote": "", "expected": null },
+    { "id": "QUOTE-017", "source": "", "quote": "content", "expected": null },
+    { "id": "QUOTE-018", "source": "case sensitive", "quote": "Case sensitive", "expected": null },
+    { "id": "QUOTE-019", "source": "Word\u00a0\t\nnext", "quote": "Word next", "expected": { "start": 0, "end": 11, "original": "Word\u00a0\t\nnext" } }
+  ]
+}

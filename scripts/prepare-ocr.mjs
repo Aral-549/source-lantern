@@ -1,0 +1,12 @@
+import { mkdir, copyFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const target = path.join(root, 'public', 'ocr');
+await mkdir(path.join(target, 'core'), { recursive: true });
+await mkdir(path.join(target, 'lang'), { recursive: true });
+await copyFile(path.join(root, 'node_modules/tesseract.js/dist/worker.min.js'), path.join(target, 'worker.min.js'));
+const core = path.join(root, 'node_modules/tesseract.js-core');
+for (const name of await readdir(core)) if (/\.wasm(?:\.js)?$/.test(name)) await copyFile(path.join(core, name), path.join(target, 'core', name));
+await copyFile(path.join(root, 'node_modules/@tesseract.js-data/eng/4.0.0_best_int/eng.traineddata.gz'), path.join(target, 'lang/eng.traineddata.gz'));
+process.stdout.write(JSON.stringify({ stage: 'ocr_assets', status: 'ready', language: 'eng', delivery: 'same-origin' }) + '\n');

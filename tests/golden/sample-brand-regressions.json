@@ -1,0 +1,10 @@
+{
+  "status": "Frozen Source Lantern sample-asset expectations",
+  "cases": [
+    {
+      "id": "BRAND-REG-001",
+      "input": "src/mock/scholarship-data.json and regenerated public/samples/nova-guidelines.pdf",
+      "expected": "The fictional sample copy and generated PDF author identify Source Lantern, never the retired product name."
+    }
+  ]
+}

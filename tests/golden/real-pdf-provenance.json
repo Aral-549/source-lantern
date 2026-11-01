@@ -1,0 +1,15 @@
+{
+  "id": "REAL-PDF-001",
+  "source": "Official Shinchan Online Hackathon problem statement linked by the supplied announcement",
+  "sourceUrl": "https://drive.google.com/file/d/1CoAB4CU5eH61WN9QCoFRtkV8QgwbaOZo/view",
+  "fixturePath": "tests/fixtures/real-problem-statement.pdf",
+  "sha256": "4b4f556aa23741220872d1b210f83cdb012ab3b7c60e36dfde7c8c75790ef508",
+  "expectedPages": 2,
+  "expectedQuotes": [
+    { "page": 1, "quote": "DIGITAL DARK SPOT" },
+    { "page": 1, "quote": "A structured summary of key information found across the selected sources." },
+    { "page": 2, "quote": "A working, polished core feature is more valuable than many incomplete features." },
+    { "page": 2, "quote": "Submission deadline" }
+  ],
+  "verification": "Source-reader implementation agent fetched the original public PDF and inspected original compressed content streams. These exact phrases and the two-page count were reported independently of the quote locator or application renderer. The SHA-256 records the original downloaded bytes."
+}

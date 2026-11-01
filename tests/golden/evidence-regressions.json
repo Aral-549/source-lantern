@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Frozen input-to-expected-output regression vectors for later runnable tests.",
+  "executionStatus": "Not executed; no implementation or test runner exists for these vectors yet.",
+  "offsetConvention": {
+    "scope": "source-wide canonicalText snapshot",
+    "unit": "UTF-16 code units",
+    "start": "zero-based inclusive",
+    "end": "exclusive"
+  },
+  "verificationNotes": [
+    "Expected results were independently checked against the draft contracts, not produced by an implementation.",
+    "The output vocabulary is implementation-neutral and does not prescribe a runtime API schema.",
+    "Unicode source data uses JSON escapes for U+1D400; the escaped pair decodes to one supplementary character occupying two UTF-16 code units.",
+    "These vectors must not be presented as passing tests or as coverage of every contract case."
+  ],
+  "cases": [
+    {
+      "id": "EV-REG-001",
+      "name": "Changing unit case must not produce sourced evidence",
+      "contractReferences": [
+        "contracts/evidence-navigation.md#E02",
+        "contracts/evidence-navigation.md#E05",
+        "contracts/evidence-navigation.md#E31",
+        "contracts/analysis-adapter.md#A12"
+      ],
+      "input": {
+        "source": {
+          "id": "source-unit-case",
+          "revision": "revision-1",
+          "canonicalText": "The limit is 5 mW."
+        },
+        "candidate": {
+          "id": "finding-unit-case",
+          "provenance": "Sourced",
+          "requiredEvidence": [
+            {
+              "sourceId": "source-unit-case",
+              "sourceRevision": "revision-1",
+              "quote": "5 MW"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "canonicalQuoteMatch": "missing",
+        "canonicalRange": null,
+        "sourcedCandidateDisposition": "removed",
+        "countAsQuoteMatched": false,
+        "highlightRectangles": [],
+        "removalReason": "Required evidence quote is absent from the canonical source-text snapshot."
+      },
+      "verificationNotes": [
+        "The source contains lowercase m followed by uppercase W; the quote replaces lowercase m with uppercase M.",
+        "Case folding would erase the difference, so it is excluded even if all remaining characters match."
+      ]
+    },
+    {
+      "id": "EV-REG-002",
+      "name": "A supplementary Unicode prefix shifts UTF-16 offsets",
+      "contractReferences": [
+        "contracts/evidence-navigation.md#Offset-convention",
+        "contracts/evidence-navigation.md#E01",
+        "contracts/evidence-navigation.md#E07",
+        "contracts/evidence-navigation.md#E32",
+        "contracts/analysis-adapter.md#Inputs"
+      ],
+      "input": {
+        "source": {
+          "id": "source-supplementary-prefix",
+          "revision": "revision-1",
+          "canonicalText": "\ud835\udc00 grant"
+        },
+        "evidence": {
+          "sourceId": "source-supplementary-prefix",
+          "sourceRevision": "revision-1",
+          "quote": "grant",
+          "parserNativeRange": {
+            "scope": "source-wide canonicalText snapshot",
+            "unit": "Unicode code points",
+            "start": 2,
+            "end": 7
+          }
+        }
+      },
+      "expected": {
+        "convertedAdapterRange": {
+          "start": 3,
+          "end": 8
+        },
+        "canonicalQuoteMatch": "exact",
+        "canonicalRange": {
+          "start": 3,
+          "end": 8
+        },
+        "matchedOriginalText": "grant",
+        "countAsQuoteMatched": true
+      },
+      "verificationNotes": [
+        "U+1D400 occupies UTF-16 indices 0 and 1, the following space occupies index 2, and grant occupies indices 3 through 7.",
+        "Python-style code-point range [2, 7) must become UTF-16 range [3, 8) at the adapter boundary.",
+        "Applying [2, 7) unchanged to the UTF-16 snapshot would select a leading space and omit the final t."
+      ]
+    },
+    {
+      "id": "EV-REG-003",
+      "name": "Canonical evidence survives unavailable viewer alignment",
+      "contractReferences": [
+        "contracts/evidence-navigation.md#E01",
+        "contracts/evidence-navigation.md#E17",
+        "contracts/analysis-adapter.md#A12"
+      ],
+      "input": {
+        "source": {
+          "id": "source-unavailable-viewer",
+          "revision": "revision-1",
+          "canonicalText": "Applications close on 30 November 2026."
+        },
+        "candidate": {
+          "id": "finding-unavailable-viewer",
+          "provenance": "Sourced",
+          "requiredEvidence": [
+            {
+              "sourceId": "source-unavailable-viewer",
+              "sourceRevision": "revision-1",
+              "quote": "30 November 2026"
+            }
+          ]
+        },
+        "viewer": {
+          "alignment": "unavailable",
+          "geometry": []
+        }
+      },
+      "expected": {
+        "canonicalQuoteMatch": "exact",
+        "canonicalRange": {
+          "start": 22,
+          "end": 38
+        },
+        "sourcedCandidateDisposition": "retained",
+        "countAsQuoteMatched": true,
+        "inspectableQuoteCard": true,
+        "highlightRectangles": [],
+        "viewerNote": "Exact phrase not located in document view"
+      },
+      "verificationNotes": [
+        "Applications close on followed by one space has 22 UTF-16 code units; 30 November 2026 has 16, giving [22, 38).",
+        "Missing viewer alignment prevents highlighting; it does not make a present canonical quote absent."
+      ]
+    },
+    {
+      "id": "EV-REG-004",
+      "name": "Absent canonical evidence removes the sourced candidate",
+      "contractReferences": [
+        "contracts/evidence-navigation.md#E05",
+        "contracts/evidence-navigation.md#E16",
+        "contracts/analysis-adapter.md#A12"
+      ],
+      "input": {
+        "source": {
+          "id": "source-absent-quote",
+          "revision": "revision-1",
+          "canonicalText": "Applications close on 30 November 2026."
+        },
+        "candidate": {
+          "id": "finding-absent-quote",
+          "provenance": "Sourced",
+          "requiredEvidence": [
+            {
+              "sourceId": "source-absent-quote",
+              "sourceRevision": "revision-1",
+              "quote": "15 December 2026"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "canonicalQuoteMatch": "missing",
+        "canonicalRange": null,
+        "sourcedCandidateDisposition": "removed",
+        "countAsQuoteMatched": false,
+        "highlightRectangles": [],
+        "removalReason": "Required evidence quote is absent from the canonical source-text snapshot.",
+        "removalReasonInspectable": true
+      },
+      "verificationNotes": [
+        "The canonical snapshot contains 30 November 2026 and contains no 15 December 2026 passage.",
+        "No deterministic formatting normalization can substitute a different date."
+      ]
+    }
+  ]
+}

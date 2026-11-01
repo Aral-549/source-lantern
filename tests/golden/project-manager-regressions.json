@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "cases": [
+    { "id": "MANAGER-REG-001", "input": "Enter the scholarship demo URL when its project is archived and contains user notes", "expected": "Restore the existing project without replacing its snapshot with an empty project" },
+    { "id": "MANAGER-REG-002", "input": "Open Manage projects for a completed sample analysis containing three sources and no draft inputs", "expected": "Display three documents, consistently with the rail and current-files folder" },
+    { "id": "MANAGER-REG-003", "input": "An older autosave is pending, a second save is queued, then the latest snapshot is saved during unmount", "expected": "The final unmount snapshot commits after all older queued saves" },
+    { "id": "MANAGER-REG-004", "input": "A second project-open action arrives before the first operation finishes", "expected": "The operation lock prevents overlapping project commits" },
+    { "id": "MANAGER-REG-005", "input": "A callback from the previous project arrives after switching", "expected": "It cannot replace the current project's question or documents" }
+  ]
+}

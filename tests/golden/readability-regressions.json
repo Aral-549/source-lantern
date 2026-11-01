@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "purpose": "User-corrected16CSSpx UI text floor and bold-at-minimum behavior; PDF glyph metrics remain owned by PDF.js rather than UI typography overrides.",
+  "minimumCssPixels": 16,
+  "minimumWeightAtFloor": 700,
+  "cases": [
+    { "id": "TYPE-REG-001", "name": "The configured UI floor is16px after the user's correction from16pt", "expected": { "readableMinimumToken": "16px" } },
+    { "id": "TYPE-REG-002", "name": "Workspace source metadata uses the minimum readable size and bold weight", "html": "<main class=\"app-shell\"><span class=\"source-domain\">Source origin</span></main>", "selector": ".source-domain", "expected": { "minimumCssPixels": 16, "minimumWeightAtFloor": 700 } },
+    { "id": "TYPE-REG-003", "name": "Portal dialog chips and actions receive the same readability policy outside app-shell", "html": "<div data-radix-portal><section class=\"dialog-content\"><span class=\"status-badge status-conflict\">Possible conflict</span><button class=\"secondary-button\">Show in source</button></section></div>", "selector": ".status-badge,.secondary-button", "expected": { "minimumCssPixels": 16, "minimumWeightAtFloor": 700 } },
+    { "id": "TYPE-REG-004", "name": "PDF glyph positioning retains PDF.js's calculated typography", "html": "<main class=\"app-shell\"><div class=\"react-pdf__Page__textContent textLayer\"><span style=\"font-size:18.75px;font-weight:400\">Original PDF glyphs</span></div></main>", "selector": ".textLayer span", "expected": { "fontSize": "18.75px", "fontWeight": "400" } }
+  ]
+}
