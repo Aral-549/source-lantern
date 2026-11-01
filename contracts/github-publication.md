@@ -45,4 +45,4 @@ Publish the existing, validated Source Lantern submission source to a public Git
 - [x] Drafted
 - [x] Reviewed by a human -- 1 November 2026; user approved publication
 - [x] Implementation matches this contract
-- [ ] Public repository verified
+- [x] Public repository verified -- 1 November 2026; public raw README returned HTTP 200 and contains the Source Lantern title and live-demo link
